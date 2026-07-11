@@ -1,0 +1,16 @@
+# Config de pnpm (v11 lee estos settings de acá, no del .npmrc).
+# nodeLinker hoisted: node_modules plano sin symlinks → el plugin de Netlify
+# puede empaquetar en Windows sin el error EPERM.
+nodeLinker: hoisted
+verifyDepsBeforeRun: false
+onlyBuiltDependencies:
+  - sharp
+  - unrs-resolver
+  - "@parcel/watcher"
+  - "@swc/core"
+  - esbuild
+allowBuilds:
+  '@parcel/watcher': set this to true or false
+  '@swc/core': set this to true or false
+  sharp: set this to true or false
+  unrs-resolver: set this to true or false

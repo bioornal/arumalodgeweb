@@ -1,0 +1,381 @@
+{
+  "nav": {
+    "brand": "The Brand",
+    "apartments": "Apartments",
+    "experiences": "Experiences",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "book": "Book"
+  },
+  "hero": {
+    "kicker": "Puerto Iguazú · Misiones",
+    "title": "A signature refuge downtown",
+    "subtitle": "Three thoughtfully designed apartments, minutes from the Falls."
+  },
+  "bookingBar": {
+    "arrival": "Check-in",
+    "departure": "Check-out",
+    "guests": "Guests",
+    "select": "Select",
+    "guestsValue": "2 adults",
+    "cta": "Check availability"
+  },
+  "searchWidget": {
+    "arrival": "Check-in",
+    "departure": "Check-out",
+    "guests": "Guests",
+    "select": "Select",
+    "cta": "View rates",
+    "guest": "guest",
+    "guestsPlural": "guests"
+  },
+  "tarifas": {
+    "title": "Available rates",
+    "subtitle": "Choose your accommodation for the selected dates",
+    "pickDatesTitle": "Choose your dates",
+    "pickDatesHint": "Pick dates to see availability and prices",
+    "from": "from",
+    "perNight": "per night",
+    "nights": "nights",
+    "night": "night",
+    "cleaning": "Cleaning",
+    "total": "Total",
+    "reserve": "Book",
+    "reserveWhatsApp": "Book via WhatsApp",
+    "waMessage": "Hi! I would like to book {unit} from {checkIn} to {checkOut} for {guests, plural, one {# guest} other {# guests}}.",
+    "waNote": "We confirm your booking instantly via WhatsApp",
+    "unavailable": "Not available for these dates",
+    "capacity": "Max. {n} guests",
+    "pickDatesCta": "Choose dates",
+    "specs": "{guests} guests · {bedrooms} rooms · {baths, plural, one {# bath} other {# baths}} · {area} m²",
+    "services": {
+      "title": "Services",
+      "wifi": "Wi-Fi",
+      "ac": "Air conditioning",
+      "kitchen": "Equipped kitchen",
+      "reception": "Reception",
+      "parking": "Parking",
+      "linens": "Bed linen and towels"
+    },
+    "distances": {
+      "title": "Distances",
+      "airport": "Airport (IGR)",
+      "falls": "Iguazú Falls",
+      "downtown": "Puerto Iguazú downtown",
+      "km": "{km} km"
+    },
+    "conditions": {
+      "title": "Conditions",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "pets": "Pets",
+      "petsNo": "Pets not allowed",
+      "petsYes": "Pets allowed",
+      "payment": "Payment methods",
+      "paymentCard": "Credit/debit card"
+    }
+  },
+  "manifiesto": {
+    "kicker": "The brand",
+    "title": "The jungle to explore. Here to rest.",
+    "body": "Aruma is three designer apartments, considered down to the last detail — the way you'd think through a home. After a day of jungle and Falls, you come back to the pool, the jacuzzi, an en-suite bath: comfort, calm and design in the heart of Puerto Iguazú.",
+    "link": "Discover the philosophy →"
+  },
+  "units": {
+    "sectionKicker": "Stays",
+    "sectionTitle": "Each unit, another way to come back from the jungle.",
+    "viewAll": "View all →",
+    "fromPrice": "From $—",
+    "perNight": "/ night",
+    "yvyra": {
+      "name": "Suite Yvyrá",
+      "sub": "up to 8 guests · 3-bedroom duplex · 3 bathrooms · pool with jacuzzi · wifi"
+    },
+    "mberu": {
+      "name": "Departamento Mberú",
+      "sub": "up to 6 guests · 2 bedrooms · upper floor · balcony overlooking the pool · equipped kitchen · wifi"
+    },
+    "tatu": {
+      "name": "Cabaña Tatú",
+      "sub": "up to 5 guests · 2 bedrooms · full kitchen · washer · pool access · wifi · DirectTV"
+    }
+  },
+  "experiencias": {
+    "kicker": "Experiences",
+    "title": "The Falls, unhurried.",
+    "body": "We give you much more than a place to sleep. We put together a tailor-made guide to what's really worth doing in Iguazú and connect you with trusted locals to book every excursion.",
+    "items": {
+      "nature": {
+        "title": "Nature",
+        "desc": "The Falls, the National Park and the Paraná rainforest, minutes away."
+      },
+      "gastronomy": {
+        "title": "Gastronomy",
+        "desc": "The tables and flavors you shouldn't miss in the Triple Frontier."
+      },
+      "frontier": {
+        "title": "Triple Frontier",
+        "desc": "Cross into Brazil and Paraguay in the same day, hassle-free."
+      },
+      "activities": {
+        "title": "Activities",
+        "desc": "Rafting, horseback riding, bird watching and more adventures."
+      }
+    }
+  },
+  "galeria": {
+    "kicker": "Gallery",
+    "title": "A story in images.",
+    "viewFull": "View full gallery",
+    "relato": {
+      "intro": "A walk through Aruma in photos: from the first dip in the pool to the last thoughtfully chosen corner.",
+      "frames": {
+        "llegada": {
+          "t": "Arrival",
+          "c": "Cross the garden and the turquoise water is already waiting."
+        },
+        "descenso": {
+          "t": "The descent",
+          "c": "A few steps among autumn maples and you're at the pool's edge."
+        },
+        "agua": {
+          "t": "The water",
+          "c": "Sunlight scattered over the warm coping: the midday pause."
+        },
+        "refugio": {
+          "t": "The retreat",
+          "c": "The cabin peeks out among the palms, level with the water."
+        },
+        "selva": {
+          "t": "The jungle around",
+          "c": "Orchids on the trunk and open sky between the leaves."
+        },
+        "iris": {
+          "t": "Wild iris",
+          "c": "Flowers that open with the morning dew."
+        },
+        "heliconia": {
+          "t": "Heliconia",
+          "c": "The tropical red that grows in the damp."
+        },
+        "adentro": {
+          "t": "Inside",
+          "c": "Objects chosen with care for every room."
+        },
+        "descanso": {
+          "t": "The rest",
+          "c": "En-suite bathrooms with fine materials and soft light."
+        },
+        "rincon": {
+          "t": "Every corner",
+          "c": "Nothing left to chance, down to the last artwork."
+        }
+      }
+    }
+  },
+  "cta": {
+    "kicker": "Booking",
+    "title": "Ready to arrive in Iguazú?",
+    "body": "Book directly with us: instant confirmation and real, human attention — no middlemen.",
+    "bookNow": "Book now",
+    "whatsapp": "Message us on WhatsApp"
+  },
+  "contacto": {
+    "kicker": "Contact",
+    "title": "We're one message away.",
+    "whatsappTitle": "You'll hear back from us directly, usually within 24 h.",
+    "whatsappSub": "Message us on WhatsApp",
+    "whereTitle": "Where we are",
+    "address": "Santa María del Iguazú esq. Obispo Angelelli — Puerto Iguazú, Misiones, Argentina",
+    "addressNote": "Right in downtown Puerto Iguazú, minutes from the Falls and steps from everything.",
+    "directTitle": "Direct",
+    "checkInOut": "Check-in 3 pm · Check-out 11 am",
+    "mapCta": "Get directions →",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone / WhatsApp",
+      "dates": "Tentative dates",
+      "message": "How do you picture your stay?",
+      "submit": "Send inquiry",
+      "sent": "Sent ✓",
+      "sentMsg": "Thank you — we received your message. We'll reply shortly."
+    }
+  },
+  "footer": {
+    "tagline": "Signature apartments in the heart of Puerto Iguazú, Misiones, Argentina.",
+    "exploreTitle": "Explore",
+    "contactTitle": "Contact",
+    "langTitle": "Language",
+    "copyright": "© 2026 Aruma Lodge. All rights reserved.",
+    "myReservation": "My reservation",
+    "credit": "Site created by Selva Digital"
+  },
+  "departamento": {
+    "breadcrumb": "Apartments",
+    "specGuests": "Guests",
+    "specBedroom": "Bedroom",
+    "specArea": "Area",
+    "subtitle": "Design, comfort and first-class amenities, in the heart of Iguazú.",
+    "spaceTitle": "The space",
+    "spaceBody": {
+      "yvyra": "A duplex designed for groups and families: 3 bedrooms (2 with a double bed and one with 3 single beds) plus a sofa in the living room, for up to 8 guests. 3 bathrooms, equipped kitchen, dining room and bedrooms on the upper floor. With free on-site parking and access to the pool with hydromassage jacuzzi, in the heart of Puerto Iguazú and minutes from the Falls.",
+      "mberu": "A bright upper-floor apartment: 2 bedrooms, a full bathroom, an equipped kitchen, living and dining rooms, and a balcony overlooking the pool. With pool access, in the heart of Puerto Iguazú and minutes from the Falls.",
+      "tatu": "A cabin with everything you need: two bedrooms, a full bathroom, a fully equipped kitchen and a laundry room with washer. With pool access, in the heart of Puerto Iguazú and minutes from the Falls."
+    },
+    "featuresTitle": "Features",
+    "featCapacity": "Capacity",
+    "featBedroom": "Bedroom",
+    "featBath": "Bathroom",
+    "featView": "View",
+    "featArea": "Area",
+    "featExterior": "Outdoor",
+    "servicesTitle": "Amenities",
+    "services": [
+      "High-speed WiFi",
+      "Air conditioning",
+      "Equipped kitchen",
+      "Premium bed linen",
+      "First-class amenities",
+      "Smart TV",
+      "Daily cleaning"
+    ],
+    "bookTitle": "Book",
+    "perNight": "/ night",
+    "bookCta": "Book",
+    "bookCtaWhatsApp": "Book via WhatsApp",
+    "bookNote": "Direct booking · automatic confirmation",
+    "waBookNote": "We confirm your booking instantly via WhatsApp",
+    "waBookMessage": "Hi! I would like to book {unit}. Is it available?",
+    "whatsappLink": "Message us on WhatsApp",
+    "otherTitle": "Other stays"
+  },
+  "meta": {
+    "title": "Aruma Lodge — Signature apartments in Puerto Iguazú",
+    "description": "Signature apartments in the heart of Puerto Iguazú: pool, jacuzzi, en-suite bathrooms and first-class amenities. Minutes from the Falls. Direct booking."
+  },
+  "reservas": {
+    "backToSite": "← Back to site",
+    "directKicker": "Direct booking",
+    "titles": [
+      " ",
+      "Your details",
+      "Pay your booking",
+      "Booking confirmed"
+    ],
+    "steps": [
+      "Details",
+      "Payment",
+      "Done"
+    ],
+    "weekdays": [
+      "M",
+      "T",
+      "W",
+      "T",
+      "F",
+      "S",
+      "S"
+    ],
+    "month": "June 2026",
+    "next": {
+      "1": "Continue to payment →"
+    },
+    "units": {
+      "yvyra": "up to 8 guests · 3-bedroom duplex · 3 bathrooms · equipped kitchen · wifi",
+      "mberu": "up to 6 guests · 2 bedrooms · upper floor · equipped kitchen · wifi",
+      "tatu": "up to 5 guests · 2 bedrooms · 1 bathroom · full kitchen · washer · wifi · DirectTV"
+    },
+    "chooseStay": "Choose your stay",
+    "perNight": "per night",
+    "yourData": "Your details",
+    "payment": "Payment",
+    "paySecure": "We'll contact you to arrange payment.",
+    "backBtn": "← Back",
+    "yourReservation": "Your booking",
+    "dates": "Dates",
+    "nights": "Nights",
+    "guests": "Guests",
+    "cleaning": "Cleaning",
+    "noFees": "No booking fees. Flexible cancellation up to 7 days before.",
+    "confirmedTitle": "Booking confirmed",
+    "confirmedSub": "Your booking is confirmed and payment received. Save your code and check your email. See you in Iguazú!",
+    "code": "Code",
+    "accommodation": "Stay",
+    "backHome": "Back to home",
+    "newRes": "New booking",
+    "arrival": "Choose the check-in date",
+    "depart": "Choose the check-out date",
+    "night": "night",
+    "nightsWord": "nights",
+    "adult": "adult",
+    "adults": "adults",
+    "ph": {
+      "nombre": "Name",
+      "apellido": "Surname",
+      "email": "Email",
+      "phone": "Phone / WhatsApp",
+      "card": "Card number",
+      "exp": "MM / YY",
+      "zip": "ZIP"
+    },
+    "submitting": "Confirming…",
+    "errConflict": "Those dates are no longer available. Please pick others.",
+    "errValidation": "Check your details: first name, last name and a valid email.",
+    "payTitle": "Secure payment",
+    "paySubtitle": "Pay by card. Your booking is confirmed once the payment is approved.",
+    "payButton": "Pay booking",
+    "payProcessing": "Processing payment…",
+    "payRejected": "The payment was declined. Check your card details and try again.",
+    "payPendingTitle": "Payment under review",
+    "payPendingSub": "Your payment is being processed. We'll confirm by email as soon as it clears.",
+    "payErrorServer": "We couldn't process the payment. Please try again or contact us.",
+    "payTestMode": "Test mode (no real charge)",
+    "payTestApprove": "Simulate approved",
+    "payTestReject": "Simulate declined",
+    "payTestPending": "Simulate pending",
+    "errServer": "We couldn't confirm the booking. Please try again or contact us.",
+    "payMethodTitle": "Payment method",
+    "payMethodCard": "Card",
+    "payMethodTransfer": "Bank transfer",
+    "transferTitle": "Bank transfer",
+    "transferIntro": "Transfer the total to the account below and upload your receipt. We confirm your booking once the payment is verified.",
+    "transferAlias": "Alias",
+    "transferCbu": "CBU",
+    "transferHolder": "Account holder",
+    "transferAmount": "Amount to transfer",
+    "transferUpload": "Upload your receipt (image or PDF)",
+    "transferSubmit": "Confirm booking",
+    "transferProcessing": "Processing…",
+    "transferMissingFile": "Attach the receipt to continue.",
+    "transferErrorServer": "We couldn't process the booking. Please try again.",
+    "checkStatus": "Check your reservation status"
+  },
+  "miReserva": {
+    "title": "Check your reservation",
+    "intro": "Enter your reservation code and the email you booked with.",
+    "codeLabel": "Reservation code",
+    "codePlaceholder": "ARM-2026-XXXX",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "submit": "Check",
+    "loading": "Searching…",
+    "notFound": "We couldn't find a reservation with those details. Check the code and email.",
+    "error": "We couldn't process your request. Please try again in a few minutes.",
+    "labelCode": "Code",
+    "labelAccommodation": "Accommodation",
+    "labelDates": "Dates",
+    "labelGuests": "Guests",
+    "labelTotal": "Total",
+    "statusConfirmed": "Confirmed",
+    "statusInVerification": "Under review",
+    "statusPaymentPending": "Payment pending",
+    "statusCancelled": "Cancelled",
+    "msgConfirmed": "Your reservation is confirmed. We look forward to hosting you!",
+    "msgInVerification": "We received your receipt and are reviewing it.",
+    "msgPaymentPending": "Your payment is pending confirmation.",
+    "msgCancelled": "This reservation was cancelled or released.",
+    "whatsappCta": "Manage via WhatsApp",
+    "newQuery": "Check another"
+  }
+}

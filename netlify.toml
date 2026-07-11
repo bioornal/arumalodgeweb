@@ -1,0 +1,14 @@
+# Deploy de Aruma Lodge (Next.js 16) en Netlify.
+# El deploy se hace desde esta carpeta (aruma-web) como base del sitio.
+[build]
+  # Invocamos Next directo con Node (no "pnpm build") para saltear el chequeo de
+  # dependencias de pnpm v11, que en Windows falla por build scripts "ignorados".
+  command = "node ./node_modules/next/dist/bin/next build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Runtime oficial de Next.js en Netlify (SSR, API routes, ISR).
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

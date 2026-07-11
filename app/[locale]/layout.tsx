@@ -1,0 +1,32 @@
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
+import { routing } from "@/lib/i18n/routing";
+import { display, sans } from "@/lib/fonts";
+import { FilmGrain } from "@/components/layout/FilmGrain";
+import { LenisProvider } from "@/components/motion/LenisProvider";
+import "../globals.css";
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  return (
+    <html lang={locale} className={`${display.variable} ${sans.variable}`}>
+      <body>
+        <NextIntlClientProvider>
+          <FilmGrain />
+          <LenisProvider>{children}</LenisProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}

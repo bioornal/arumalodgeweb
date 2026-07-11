@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta cerrada del handoff */
+  --color-terracota: #a04b2a;
+  --color-terracota-hover: #85391f;
+  --color-carbon: #1d1d1d;
+  --color-marfil: #f8f5f0;
+  --color-arena: #e8e1d5;        /* arena cálida */
+  --color-arena-clara: #f1ece3;
+  --color-selva: #23362b;        /* verde selva */
+  --color-bronce: #9a7b4f;
+  --color-whatsapp: #2bb673;
+  --color-cuerpo: #4a463f;
+  --color-muted: #6b665d;
+  --color-placeholder: #a89f8e;
+  --color-borde-claro: #e2dace;
+  --color-borde-medio: #d8cfbf;
+  --color-slot: #e4dcce;
+
+  --font-display: var(--font-display-loaded), "Cormorant Garamond", serif;
+  --font-sans: var(--font-sans-loaded), "Manrope", system-ui, sans-serif;
+
+  --radius-boton: 2px;
+  --radius-input: 4px;
+  --radius-card: 8px;
+
+  --shadow-booking: 0 40px 80px -50px rgba(29, 29, 29, 0.6);
+  --shadow-card: 0 30px 70px -55px rgba(29, 29, 29, 0.45);
+  --shadow-fab: 0 18px 36px -16px rgba(29, 29, 29, 0.7);
+}
+
+* { box-sizing: border-box; }
+/* Blindaje anti-scroll-horizontal: clip no crea scroll container (no rompe sticky) */
+html, body { overflow-x: hidden; overflow-x: clip; }
+body { margin: 0; background: var(--color-marfil); color: var(--color-carbon); font-family: var(--font-sans); }
+::selection { background: var(--color-terracota); color: var(--color-marfil); }
+
+/* Animaciones (las reactivamos con JS; el contenido es visible sin ellas) */
+@keyframes aruma-kb { from { transform: scale(1.12); } to { transform: scale(1.01); } }
+@keyframes aruma-cue { 0%,100% { transform: translateY(0); opacity: .5; } 50% { transform: translateY(7px); opacity: 1; } }
+
+/* Reduced motion: estado final visible, sin animación */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+
+/* ======================== react-day-picker overrides (v10) ======================== */
+/* Month caption label: display font, carbon, prominent */
+.rdp-month_caption {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 12px !important;
+}
+
+.rdp-caption_label {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  color: #1D1D1D !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* Nav buttons: visible + tappable */
+.rdp-nav {
+  display: flex !important;
+  gap: 8px !important;
+}
+
+.rdp-button_previous,
+.rdp-button_next {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  border: 1px solid #c9bfae !important;
+  border-radius: 50% !important;
+  background: #fff !important;
+  cursor: pointer !important;
+  color: #1D1D1D !important;
+  font-size: 16px !important;
+  transition: border-color .2s !important;
+}
+
+.rdp-button_previous:hover,
+.rdp-button_next:hover {
+  border-color: #A04B2A !important;
+  color: #A04B2A !important;
+}
+
+/* Range endpoints: terracota background */
+.rdp-aruma-end {
+  background-color: #A04B2A !important;
+  color: #F8F5F0 !important;
+  border-radius: 7px !important;
+}
+
+/* Range middle: warm peach */
+.rdp-aruma-middle {
+  background-color: #EAD3C5 !important;
+  color: #7c4226 !important;
+  border-radius: 0 !important;
+}
+
+/* Weekday headers: bronce 11px */
+.rdp-weekday {
+  font-size: 11px !important;
+  letter-spacing: .1em !important;
+  color: #9A7B4F !important;
+  text-transform: uppercase !important;
+  font-weight: 400 !important;
+}
+
+/* Day button focus/hover: subtle ring */
+.rdp-day_button:focus-visible {
+  outline: 2px solid #9A7B4F !important;
+  outline-offset: 2px !important;
+}
+
+/* Root calendar: inherit font */
+.rdp-root {
+  font-family: var(--font-sans), 'Manrope', system-ui, sans-serif !important;
+  --rdp-accent-color: #A04B2A;
+  --rdp-accent-background-color: #EAD3C5;
+}
+
+/* Today: subtle underline */
+.rdp-today:not(.rdp-aruma-end) {
+  font-weight: 700 !important;
+  color: #A04B2A !important;
+}
+
+/* Disabled days: muted */
+.rdp-disabled {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
+}
+/* ================================================================================ */

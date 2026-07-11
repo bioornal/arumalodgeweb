@@ -1,0 +1,381 @@
+{
+  "nav": {
+    "brand": "A Marca",
+    "apartments": "Apartamentos",
+    "experiences": "Experiências",
+    "gallery": "Galeria",
+    "contact": "Contato",
+    "book": "Reservar"
+  },
+  "hero": {
+    "kicker": "Puerto Iguazú · Misiones",
+    "title": "Refúgio de autor no pleno centro",
+    "subtitle": "Três apartamentos pensados em cada detalhe, a minutos das Cataratas."
+  },
+  "bookingBar": {
+    "arrival": "Chegada",
+    "departure": "Saída",
+    "guests": "Hóspedes",
+    "select": "Selecionar",
+    "guestsValue": "2 adultos",
+    "cta": "Ver disponibilidade"
+  },
+  "searchWidget": {
+    "arrival": "Check-in",
+    "departure": "Check-out",
+    "guests": "Hóspedes",
+    "select": "Selecionar",
+    "cta": "Ver tarifas",
+    "guest": "hóspede",
+    "guestsPlural": "hóspedes"
+  },
+  "tarifas": {
+    "title": "Tarifas disponíveis",
+    "subtitle": "Escolha sua acomodação para as datas selecionadas",
+    "pickDatesTitle": "Escolha suas datas",
+    "pickDatesHint": "Selecione datas para ver disponibilidade e preços",
+    "from": "a partir de",
+    "perNight": "por noite",
+    "nights": "noites",
+    "night": "noite",
+    "cleaning": "Limpeza",
+    "total": "Total",
+    "reserve": "Reservar",
+    "reserveWhatsApp": "Reservar pelo WhatsApp",
+    "waMessage": "Olá! Quero reservar {unit} de {checkIn} a {checkOut} para {guests, plural, one {# hóspede} other {# hóspedes}}.",
+    "waNote": "Confirmamos sua reserva na hora pelo WhatsApp",
+    "unavailable": "Indisponível para estas datas",
+    "capacity": "Máx. {n} hóspedes",
+    "pickDatesCta": "Escolha as datas",
+    "specs": "{guests} hóspedes · {bedrooms} amb · {baths, plural, one {# banheiro} other {# banheiros}} · {area} m²",
+    "services": {
+      "title": "Serviços",
+      "wifi": "Wi-Fi",
+      "ac": "Ar-condicionado",
+      "kitchen": "Cozinha equipada",
+      "reception": "Recepção",
+      "parking": "Estacionamento",
+      "linens": "Roupa de cama e toalhas"
+    },
+    "distances": {
+      "title": "Distâncias",
+      "airport": "Aeroporto (IGR)",
+      "falls": "Cataratas do Iguaçu",
+      "downtown": "Centro de Puerto Iguazú",
+      "km": "{km} km"
+    },
+    "conditions": {
+      "title": "Condições",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "pets": "Animais",
+      "petsNo": "Não são permitidos animais",
+      "petsYes": "Animais permitidos",
+      "payment": "Formas de pagamento",
+      "paymentCard": "Cartão de crédito/débito"
+    }
+  },
+  "manifiesto": {
+    "kicker": "A marca",
+    "title": "A selva se visita. Aqui se descansa.",
+    "body": "O Aruma são três apartamentos de autor, pensados em cada detalhe como se pensa uma casa. Depois de um dia de selva e Cataratas, você volta para a piscina, o jacuzzi, um banheiro em suíte: conforto, calma e design em pleno centro de Puerto Iguazú.",
+    "link": "Conhecer a filosofia →"
+  },
+  "units": {
+    "sectionKicker": "Acomodações",
+    "sectionTitle": "Cada unidade, outro jeito de voltar da selva.",
+    "viewAll": "Ver todos →",
+    "fromPrice": "A partir de $—",
+    "perNight": "/ noite",
+    "yvyra": {
+      "name": "Suite Yvyrá",
+      "sub": "até 8 hóspedes · duplex de 3 quartos · 3 banheiros · piscina com jacuzzi · wifi"
+    },
+    "mberu": {
+      "name": "Departamento Mberú",
+      "sub": "até 6 hóspedes · 2 quartos · no andar superior · sacada com vista para a piscina · cozinha equipada · wifi"
+    },
+    "tatu": {
+      "name": "Cabaña Tatú",
+      "sub": "até 5 hóspedes · 2 quartos · cozinha completa · máquina de lavar · acesso à piscina · wifi · DirectTV"
+    }
+  },
+  "experiencias": {
+    "kicker": "Experiências",
+    "title": "As Cataratas, sem pressa.",
+    "body": "A gente te dá muito mais do que um lugar para dormir. Montamos um guia sob medida com o que realmente vale a pena em Iguaçu e te conectamos com gente de confiança para reservar cada passeio.",
+    "items": {
+      "nature": {
+        "title": "Natureza",
+        "desc": "Cataratas, Parque Nacional e Selva Paranaense, a minutos do lodge."
+      },
+      "gastronomy": {
+        "title": "Gastronomia",
+        "desc": "As mesas e sabores que você não pode perder na Tríplice Fronteira."
+      },
+      "frontier": {
+        "title": "Tríplice Fronteira",
+        "desc": "Cruze para o Brasil e o Paraguai no mesmo dia, sem complicação."
+      },
+      "activities": {
+        "title": "Atividades",
+        "desc": "Rafting, cavalgadas, observação de aves e outras aventuras."
+      }
+    }
+  },
+  "galeria": {
+    "kicker": "Galeria",
+    "title": "Um relato em imagens.",
+    "viewFull": "Ver galeria completa",
+    "relato": {
+      "intro": "Um passeio em fotos pelo Aruma: do primeiro mergulho ao último canto pensado para você ficar.",
+      "frames": {
+        "llegada": {
+          "t": "A chegada",
+          "c": "Você cruza o jardim e a água turquesa já está esperando."
+        },
+        "descenso": {
+          "t": "A descida",
+          "c": "Alguns degraus entre bordos de outono e você está na beira da piscina."
+        },
+        "agua": {
+          "t": "A água",
+          "c": "Reflexos de sol sobre a borda quente: a pausa do meio-dia."
+        },
+        "refugio": {
+          "t": "O refúgio",
+          "c": "A cabana aparece entre as palmeiras, no nível da água."
+        },
+        "selva": {
+          "t": "A selva ao redor",
+          "c": "Orquídeas sobre o tronco e céu aberto entre as folhas."
+        },
+        "iris": {
+          "t": "Íris da mata",
+          "c": "Flores que se abrem com o orvalho da manhã."
+        },
+        "heliconia": {
+          "t": "Helicônia",
+          "c": "O vermelho tropical que cresce na umidade."
+        },
+        "adentro": {
+          "t": "Por dentro",
+          "c": "Objetos escolhidos com calma para cada ambiente."
+        },
+        "descanso": {
+          "t": "O descanso",
+          "c": "Banheiros en suíte com materiais nobres e luz suave."
+        },
+        "rincon": {
+          "t": "Cada canto",
+          "c": "Nada foi deixado ao acaso, até o último quadro."
+        }
+      }
+    }
+  },
+  "cta": {
+    "kicker": "Reservas",
+    "title": "Prontos para chegar a Iguaçu?",
+    "body": "Você reserva direto com a gente: confirmação na hora e atendimento de verdade, sem intermediários.",
+    "bookNow": "Reservar agora",
+    "whatsapp": "Fale conosco no WhatsApp"
+  },
+  "contacto": {
+    "kicker": "Contato",
+    "title": "Estamos a uma mensagem de distância.",
+    "whatsappTitle": "Quem responde somos nós, normalmente em menos de 24 h.",
+    "whatsappSub": "Fale conosco no WhatsApp",
+    "whereTitle": "Onde estamos",
+    "address": "Santa María del Iguazú esq. Obispo Angelelli — Puerto Iguazú, Misiones, Argentina",
+    "addressNote": "Em pleno centro de Puerto Iguazú, a minutos das Cataratas e a um passo de tudo.",
+    "directTitle": "Direto",
+    "checkInOut": "Check-in 15h · Check-out 11h",
+    "mapCta": "Como chegar →",
+    "form": {
+      "name": "Nome",
+      "email": "E-mail",
+      "phone": "Telefone / WhatsApp",
+      "dates": "Datas tentativas",
+      "message": "Como você imagina sua estadia?",
+      "submit": "Enviar consulta",
+      "sent": "Enviado ✓",
+      "sentMsg": "Obrigado — recebemos sua mensagem. Responderemos em breve."
+    }
+  },
+  "footer": {
+    "tagline": "Apartamentos de autor no centro de Puerto Iguazú, Misiones, Argentina.",
+    "exploreTitle": "Explorar",
+    "contactTitle": "Contato",
+    "langTitle": "Idioma",
+    "copyright": "© 2026 Aruma Lodge. Todos os direitos reservados.",
+    "myReservation": "Minha reserva",
+    "credit": "Site criado por Selva Digital"
+  },
+  "departamento": {
+    "breadcrumb": "Apartamentos",
+    "specGuests": "Hóspedes",
+    "specBedroom": "Quarto",
+    "specArea": "Área",
+    "subtitle": "Design, conforto e equipamento de primeira, no pleno centro de Iguaçu.",
+    "spaceTitle": "O espaço",
+    "spaceBody": {
+      "yvyra": "Um duplex pensado para grupos e famílias: 3 quartos (2 com cama de casal e um com 3 camas de solteiro) e um sofá na sala de estar, para até 8 hóspedes. 3 banheiros, cozinha equipada, sala de jantar e quartos no andar superior. Com estacionamento gratuito no local e acesso à piscina com jacuzzi hidromassagem, no pleno centro de Puerto Iguazú e a minutos das Cataratas.",
+      "mberu": "Um apartamento luminoso no andar superior: 2 quartos, banheiro completo, cozinha equipada, sala de estar e jantar, e uma sacada com vista para a piscina. Com acesso à piscina, no pleno centro de Puerto Iguazú e a minutos das Cataratas.",
+      "tatu": "Uma cabana com tudo o que você precisa: dois quartos, banheiro completo, cozinha totalmente equipada e lavanderia com máquina de lavar. Com acesso à piscina, no pleno centro de Puerto Iguazú e a minutos das Cataratas."
+    },
+    "featuresTitle": "Características",
+    "featCapacity": "Capacidade",
+    "featBedroom": "Quarto",
+    "featBath": "Banheiro",
+    "featView": "Vista",
+    "featArea": "Área",
+    "featExterior": "Exterior",
+    "servicesTitle": "Comodidades",
+    "services": [
+      "WiFi de alta velocidade",
+      "Ar-condicionado",
+      "Cozinha equipada",
+      "Roupa de cama premium",
+      "Amenidades de primeira",
+      "Smart TV",
+      "Limpeza diária"
+    ],
+    "bookTitle": "Reservar",
+    "perNight": "/ noite",
+    "bookCta": "Reservar",
+    "bookCtaWhatsApp": "Reservar pelo WhatsApp",
+    "bookNote": "Reserva direta · confirmação automática",
+    "waBookNote": "Confirmamos sua reserva na hora pelo WhatsApp",
+    "waBookMessage": "Olá! Quero reservar {unit}. Tem disponibilidade?",
+    "whatsappLink": "Fale conosco no WhatsApp",
+    "otherTitle": "Outras acomodações"
+  },
+  "meta": {
+    "title": "Aruma Lodge — Apartamentos de autor em Puerto Iguazú",
+    "description": "Apartamentos de autor no centro de Puerto Iguazú: piscina, jacuzzi, banheiros en suite e equipamento de primeira. A minutos das Cataratas. Reserva direta."
+  },
+  "reservas": {
+    "backToSite": "← Voltar ao site",
+    "directKicker": "Reserva direta",
+    "titles": [
+      " ",
+      "Seus dados",
+      "Pague sua reserva",
+      "Reserva confirmada"
+    ],
+    "steps": [
+      "Dados",
+      "Pagamento",
+      "Pronto"
+    ],
+    "weekdays": [
+      "S",
+      "T",
+      "Q",
+      "Q",
+      "S",
+      "S",
+      "D"
+    ],
+    "month": "Junho 2026",
+    "next": {
+      "1": "Continuar para o pagamento →"
+    },
+    "units": {
+      "yvyra": "até 8 hóspedes · duplex 3 quartos · 3 banheiros · cozinha equipada · wifi",
+      "mberu": "até 6 hóspedes · 2 quartos · no andar superior · cozinha equipada · wifi",
+      "tatu": "até 5 hóspedes · 2 quartos · 1 banheiro · cozinha completa · máquina de lavar · wifi · DirectTV"
+    },
+    "chooseStay": "Escolha sua acomodação",
+    "perNight": "por noite",
+    "yourData": "Seus dados",
+    "payment": "Pagamento",
+    "paySecure": "Entraremos em contato para combinar o pagamento.",
+    "backBtn": "← Voltar",
+    "yourReservation": "Sua reserva",
+    "dates": "Datas",
+    "nights": "Noites",
+    "guests": "Hóspedes",
+    "cleaning": "Limpeza",
+    "noFees": "Sem taxas de reserva. Cancelamento flexível até 7 dias antes.",
+    "confirmedTitle": "Reserva confirmada",
+    "confirmedSub": "Sua reserva está confirmada e o pagamento foi recebido. Guarde seu código e confira seu email. Esperamos você em Iguaçu!",
+    "code": "Código",
+    "accommodation": "Acomodação",
+    "backHome": "Voltar ao início",
+    "newRes": "Nova reserva",
+    "arrival": "Escolha a data de chegada",
+    "depart": "Escolha a data de saída",
+    "night": "noite",
+    "nightsWord": "noites",
+    "adult": "adulto",
+    "adults": "adultos",
+    "ph": {
+      "nombre": "Nome",
+      "apellido": "Sobrenome",
+      "email": "E-mail",
+      "phone": "Telefone / WhatsApp",
+      "card": "Número do cartão",
+      "exp": "MM / AA",
+      "zip": "CEP"
+    },
+    "submitting": "Confirmando…",
+    "errConflict": "Essas datas já não estão disponíveis. Escolha outras.",
+    "errValidation": "Revise os dados: nome, sobrenome e um e-mail válido.",
+    "payTitle": "Pagamento seguro",
+    "paySubtitle": "Pague com cartão. A reserva é confirmada quando o pagamento for aprovado.",
+    "payButton": "Pagar reserva",
+    "payProcessing": "Processando pagamento…",
+    "payRejected": "O pagamento foi recusado. Verifique os dados do cartão e tente novamente.",
+    "payPendingTitle": "Pagamento em análise",
+    "payPendingSub": "Seu pagamento está sendo processado. Confirmaremos por email assim que for aprovado.",
+    "payErrorServer": "Não conseguimos processar o pagamento. Tente novamente ou fale conosco.",
+    "payTestMode": "Modo teste (sem cobrança real)",
+    "payTestApprove": "Simular aprovado",
+    "payTestReject": "Simular recusado",
+    "payTestPending": "Simular pendente",
+    "errServer": "Não conseguimos confirmar a reserva. Tente novamente ou fale conosco.",
+    "payMethodTitle": "Forma de pagamento",
+    "payMethodCard": "Cartão",
+    "payMethodTransfer": "Transferência",
+    "transferTitle": "Transferência bancária",
+    "transferIntro": "Transfira o total para a conta abaixo e envie o comprovante. Confirmamos sua reserva após verificar o pagamento.",
+    "transferAlias": "Alias",
+    "transferCbu": "CBU",
+    "transferHolder": "Titular",
+    "transferAmount": "Valor a transferir",
+    "transferUpload": "Envie seu comprovante (imagem ou PDF)",
+    "transferSubmit": "Confirmar reserva",
+    "transferProcessing": "Processando…",
+    "transferMissingFile": "Anexe o comprovante para continuar.",
+    "transferErrorServer": "Não foi possível processar a reserva. Tente novamente.",
+    "checkStatus": "Consulte o status da sua reserva"
+  },
+  "miReserva": {
+    "title": "Consulte sua reserva",
+    "intro": "Informe o código da reserva e o e-mail usado para reservar.",
+    "codeLabel": "Código da reserva",
+    "codePlaceholder": "ARM-2026-XXXX",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "voce@email.com",
+    "submit": "Consultar",
+    "loading": "Buscando…",
+    "notFound": "Não encontramos uma reserva com esses dados. Verifique o código e o e-mail.",
+    "error": "Não foi possível processar a consulta. Tente novamente em alguns minutos.",
+    "labelCode": "Código",
+    "labelAccommodation": "Acomodação",
+    "labelDates": "Datas",
+    "labelGuests": "Hóspedes",
+    "labelTotal": "Total",
+    "statusConfirmed": "Confirmada",
+    "statusInVerification": "Em verificação",
+    "statusPaymentPending": "Pagamento pendente",
+    "statusCancelled": "Cancelada",
+    "msgConfirmed": "Sua reserva está confirmada. Esperamos por você!",
+    "msgInVerification": "Recebemos seu comprovante e estamos verificando.",
+    "msgPaymentPending": "Seu pagamento está pendente de confirmação.",
+    "msgCancelled": "Esta reserva foi cancelada ou liberada.",
+    "whatsappCta": "Gerenciar pelo WhatsApp",
+    "newQuery": "Consultar outra"
+  }
+}
