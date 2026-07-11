@@ -6,8 +6,11 @@
 - Deploy: Netlify (CLI no instalada aún globalmente; `netlify.toml` usa `node ./node_modules/next/dist/bin/next build`)
 
 ## Estado del deploy
-- **Pendiente:** deploy a Netlify con `netlify deploy --prod --dir=aruma-web` (o desde dentro de `aruma-web`).
-- Netlify CLI no está instalada. Instalar con `npm install -g netlify-cli` antes de deployar.
+- **Deploy continuo desde GitHub (2026-07-11):** repo `github.com/bioornal/arumalodgeweb` (branch `main`).
+  - El repo git vive en `aruma-web/` (repo propio e independiente; **NO** usar el repo viejo con raíz en `C:\Users\spezi` HOME — subiría secretos del home).
+  - Cada `git push` a `main` dispara build+deploy en Netlify (una vez conectado el repo en el dashboard).
+  - Config de build en `netlify.toml` (base = raíz del repo, sin subcarpeta).
+- `.env.local` NO se sube (gitignored). Las env vars viven en Netlify (site settings) — cerca del límite de 4KB.
 - `.env.local` tiene `NEXT_PUBLIC_BOOKING_MODE=whatsapp` (reserva online pausada, CTAs derivan a WhatsApp).
 
 ## Cambios recientes
