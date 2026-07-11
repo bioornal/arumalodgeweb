@@ -5,6 +5,7 @@ export function FilmGrain() {
   return (
     <div
       aria-hidden
+      data-grain
       className="pointer-events-none fixed inset-0 z-[60] opacity-[0.05]"
       style={{
         backgroundImage:

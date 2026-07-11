@@ -2,12 +2,14 @@
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { fxDisabled } from "@/lib/fx";
 
 export function HeroReveal({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
+      if (fxDisabled()) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const root = ref.current;
       if (!root) return;

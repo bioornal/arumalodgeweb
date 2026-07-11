@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { fxDisabled } from "@/lib/fx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,6 +53,7 @@ export function SelvaTrail() {
 
   useGSAP(
     () => {
+      if (fxDisabled()) return;
       const svg = svgRef.current;
       const track = trackRef.current;
       const progress = progressRef.current;

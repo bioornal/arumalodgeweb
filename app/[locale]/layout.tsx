@@ -19,9 +19,19 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
+  // suppressHydrationWarning: el script inline del body puede agregar la
+  // clase sin-fx a <html> antes de hidratar (mismo patrón que next-themes)
   return (
-    <html lang={locale} className={`${display.variable} ${sans.variable}`}>
+    <html lang={locale} className={`${display.variable} ${sans.variable}`} suppressHydrationWarning>
       <body>
+        {/* Kill-switch de diagnóstico (?sinfx=1): corre antes de hidratar,
+            para poder apagar todos los efectos en producción. Ver lib/fx.ts */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'if(location.search.indexOf("sinfx")>-1)document.documentElement.classList.add("sin-fx");',
+          }}
+        />
         <NextIntlClientProvider>
           <FilmGrain />
           <LenisProvider>{children}</LenisProvider>

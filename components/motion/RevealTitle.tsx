@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { fxDisabled } from "@/lib/fx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +22,7 @@ export function RevealTitle({
 
   useGSAP(
     () => {
+      if (fxDisabled()) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const inner = ref.current?.firstElementChild;
       if (!inner) return;

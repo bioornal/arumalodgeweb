@@ -45,6 +45,14 @@ body { margin: 0; background: var(--color-marfil); color: var(--color-carbon); f
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
 
+/* Kill-switch de diagnóstico ?sinfx=1 (ver lib/fx.ts): apaga animaciones,
+   transiciones y el grano; los componentes JS de motion tampoco inicializan */
+html.sin-fx *, html.sin-fx *::before, html.sin-fx *::after {
+  animation: none !important;
+  transition: none !important;
+}
+html.sin-fx [data-grain] { display: none !important; }
+
 /* ======================== react-day-picker overrides (v10) ======================== */
 /* Month caption label: display font, carbon, prominent */
 .rdp-month_caption {
