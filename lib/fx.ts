@@ -1,11 +1,14 @@
-// Kill-switch de diagnóstico: con ?sinfx=1 en la URL, un script inline del
-// layout marca <html class="sin-fx"> ANTES de hidratar. Los componentes de
-// motion consultan este flag y no inicializan nada (Lenis, GSAP, scrubs);
-// las animaciones/transiciones CSS y el grano se apagan por CSS.
-// Sirve para bisecar problemas de performance en producción sin redeploys.
-export function fxDisabled(): boolean {
-  return (
-    typeof document !== "undefined" &&
-    document.documentElement.classList.contains("sin-fx")
-  );
+// Kill-switch de diagnóstico por query param, para bisecar problemas de
+// performance en producción sin redeploys. Un script inline del layout corre
+// ANTES de hidratar y traduce la URL a `data-fx` en <html>:
+//   (sin param)   → sin data-fx: todos los efectos andan normal
+//   ?sinfx=1      → data-fx=""  : TODOS los efectos apagados
+//   ?fx=a,b       → data-fx="a b": SOLO esos efectos encendidos
+// Features: lenis · trail · figuras · reveals · css (animaciones/transiciones
+// CSS, vía globals.css) · grano (FilmGrain, vía globals.css).
+export function fxAllowed(feature: string): boolean {
+  if (typeof document === "undefined") return true;
+  const fx = document.documentElement.dataset.fx;
+  if (fx === undefined) return true;
+  return fx.split(" ").includes(feature);
 }

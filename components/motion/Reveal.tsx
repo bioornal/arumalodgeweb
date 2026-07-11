@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { fxDisabled } from "@/lib/fx";
+import { fxAllowed } from "@/lib/fx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +20,7 @@ export function Reveal({
 
   useGSAP(
     () => {
-      if (fxDisabled()) return;
+      if (!fxAllowed("reveals")) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       gsap.fromTo(
         ref.current,

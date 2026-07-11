@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { fxDisabled } from "@/lib/fx";
+import { fxAllowed } from "@/lib/fx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,7 +11,7 @@ export function Parallax({ children, speed = 80, className = "" }:
   { children: React.ReactNode; speed?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   useGSAP(() => {
-    if (fxDisabled()) return;
+    if (!fxAllowed("reveals")) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.to(ref.current, {
       y: speed,

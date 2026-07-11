@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import Lenis from "lenis";
-import { fxDisabled } from "@/lib/fx";
+import { fxAllowed } from "@/lib/fx";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -18,7 +18,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    if (fxDisabled()) return;
+    if (!fxAllowed("lenis")) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const instance = new Lenis({ duration: 1.1, smoothWheel: true });
     instance.on("scroll", ScrollTrigger.update);

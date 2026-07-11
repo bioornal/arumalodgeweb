@@ -24,12 +24,14 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${display.variable} ${sans.variable}`} suppressHydrationWarning>
       <body>
-        {/* Kill-switch de diagnóstico (?sinfx=1): corre antes de hidratar,
-            para poder apagar todos los efectos en producción. Ver lib/fx.ts */}
+        {/* Kill-switch de diagnóstico (?sinfx=1 / ?fx=lista): corre antes de
+            hidratar, para bisecar efectos en producción. Ver lib/fx.ts */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              'if(location.search.indexOf("sinfx")>-1)document.documentElement.classList.add("sin-fx");',
+              'var q=location.search,m=q.match(/[?&]fx=([^&]*)/);' +
+              'if(q.indexOf("sinfx")>-1)document.documentElement.dataset.fx="";' +
+              'else if(m)document.documentElement.dataset.fx=decodeURIComponent(m[1]).replace(/,/g," ");',
           }}
         />
         <NextIntlClientProvider>

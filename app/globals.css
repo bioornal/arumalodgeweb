@@ -45,13 +45,16 @@ body { margin: 0; background: var(--color-marfil); color: var(--color-carbon); f
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
 
-/* Kill-switch de diagnóstico ?sinfx=1 (ver lib/fx.ts): apaga animaciones,
-   transiciones y el grano; los componentes JS de motion tampoco inicializan */
-html.sin-fx *, html.sin-fx *::before, html.sin-fx *::after {
+/* Kill-switch de diagnóstico ?sinfx=1 / ?fx=lista (ver lib/fx.ts): en modo
+   diagnóstico (data-fx presente) las animaciones/transiciones CSS solo corren
+   si la lista incluye "css", y el grano solo si incluye "grano" */
+html[data-fx]:not([data-fx~="css"]) *,
+html[data-fx]:not([data-fx~="css"]) *::before,
+html[data-fx]:not([data-fx~="css"]) *::after {
   animation: none !important;
   transition: none !important;
 }
-html.sin-fx [data-grain] { display: none !important; }
+html[data-fx]:not([data-fx~="grano"]) [data-grain] { display: none !important; }
 
 /* ======================== react-day-picker overrides (v10) ======================== */
 /* Month caption label: display font, carbon, prominent */

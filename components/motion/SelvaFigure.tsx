@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { fxDisabled } from "@/lib/fx";
+import { fxAllowed } from "@/lib/fx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,7 +80,7 @@ export function SelvaFigure({
 
   useGSAP(
     () => {
-      if (fxDisabled()) return;
+      if (!fxAllowed("figuras")) return;
       const el = fillRef.current;
       if (!el) return;
       // Oculta en mobile (display:none) o sin layout (jsdom): sin trigger,
