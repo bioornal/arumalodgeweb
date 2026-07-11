@@ -237,6 +237,10 @@ export function SelvaTrail() {
 
       if (!build()) return;
 
+      // Se cuantiza a 1px y solo se escribe cuando cambia: cada escritura de
+      // strokeDashoffset invalida el repintado del SVG (que abarca toda la
+      // página), así que las escrituras redundantes por frame salen caras.
+      let lastOffset = -1;
       ScrollTrigger.create({
         trigger: main,
         start: "top top",
@@ -248,7 +252,10 @@ export function SelvaTrail() {
           const vh = window.innerHeight;
           const scroll = mainTopAbs + self.progress * (mainH - vh);
           const targetY = scroll + vh * 0.52 - mainTopAbs;
-          progress.style.strokeDashoffset = String(total - lengthAtY(targetY));
+          const offset = Math.round(total - lengthAtY(targetY));
+          if (offset === lastOffset) return;
+          lastOffset = offset;
+          progress.style.strokeDashoffset = String(offset);
         },
       });
 

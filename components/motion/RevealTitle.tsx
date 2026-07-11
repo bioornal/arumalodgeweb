@@ -41,7 +41,7 @@ export function RevealTitle({
 
   return (
     <div ref={ref} className={`overflow-hidden ${className}`}>
-      <div className="will-change-transform">{children}</div>
+      <div>{children}</div>
     </div>
   );
 }

@@ -108,7 +108,7 @@ export function ImageSlot({
         src={src}
         alt={label}
         style={{ filter: tweak?.filter, objectPosition: position ?? tweak?.position }}
-        className={`absolute inset-0 h-full w-full ${objectClass} transition-transform duration-[900ms] ease-[cubic-bezier(.16,.84,.44,1)] will-change-transform`}
+        className={`absolute inset-0 h-full w-full ${objectClass} transition-transform duration-[900ms] ease-[cubic-bezier(.16,.84,.44,1)]`}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
         decoding={priority ? "sync" : "async"}

@@ -25,7 +25,7 @@ export function Hero() {
             <img
               src={HERO_IMAGE}
               alt={t("title")}
-              className="absolute inset-0 h-full w-full object-cover object-[20%_58%] md:object-center [filter:saturate(1.08)_contrast(1.03)] transition-transform duration-[900ms] ease-[cubic-bezier(.16,.84,.44,1)] will-change-transform"
+              className="absolute inset-0 h-full w-full object-cover object-[20%_58%] md:object-center [filter:saturate(1.08)_contrast(1.03)]"
               loading="eager"
               fetchPriority="high"
               decoding="sync"
