@@ -23,12 +23,13 @@ describe("getRatesForRange", () => {
     expect(yvyra.total).toBe(pricePerNight("yvyra", 4) * 3 + CLEANING_FEE);
   });
 
-  it("precio dinámico: yvyra/mberu a 6 huéspedes cobran tarifa extendida", async () => {
+  it("tarifa plana: mismo precio sin importar el número de huéspedes", async () => {
     mocked.mockResolvedValue({ disabledDates: [], source: "google-calendar" });
     const rates = await getRatesForRange("2026-07-02", "2026-07-05", 6);
     const yvyra = rates.find((r) => r.unit.slug === "yvyra")!;
     expect(yvyra.total).toBe(pricePerNight("yvyra", 6) * 3 + CLEANING_FEE);
-    expect(pricePerNight("yvyra", 6)).toBe(180000);
+    expect(pricePerNight("yvyra", 6)).toBe(150000);
+    expect(pricePerNight("mberu", 6)).toBe(250000);
   });
 
   it("tatu tiene tarifa plana sin importar el número de huéspedes", async () => {
@@ -36,7 +37,7 @@ describe("getRatesForRange", () => {
     const rates = await getRatesForRange("2026-07-02", "2026-07-05", 4);
     const tatu = rates.find((r) => r.unit.slug === "tatu")!;
     expect(tatu.total).toBe(TATU_PRICE * 3 + CLEANING_FEE);
-    expect(pricePerNight("tatu", 4)).toBe(140000);
+    expect(pricePerNight("tatu", 4)).toBe(130000);
   });
 
   it("no disponible si alguna noche del rango está ocupada", async () => {

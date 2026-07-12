@@ -82,8 +82,8 @@ describe("POST /api/payments", () => {
     createCardPayment.mockResolvedValue({ id: "pay-1", status: "approved" });
     createBookingEvent.mockResolvedValue({ eventId: "evt-1" });
     await POST(post({ ...VALID, amount: 1, total: 1 }));
-    // tatu 4 huéspedes → $140.000 × 3 noches + $30.000 limpieza = $450.000
-    expect(createCardPayment.mock.calls[0][0].amount).toBe(450000);
+    // tatu 4 huéspedes → $130.000 × 3 noches + $30.000 limpieza = $420.000
+    expect(createCardPayment.mock.calls[0][0].amount).toBe(420000);
   });
 
   it("rejected → NO crea evento, responde 200 rejected", async () => {
