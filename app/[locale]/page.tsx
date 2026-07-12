@@ -61,9 +61,10 @@ export async function generateMetadata({
       siteName: "Aruma Lodge",
       images: [
         {
-          url: "https://res.cloudinary.com/djtvjkcu6/image/upload/c_fill,g_auto,w_1200,h_630,f_jpg,q_auto/v1781879164/ArumaLodge/Hero_bgsjtf.png",
+          url: "https://res.cloudinary.com/djtvjkcu6/image/upload/c_fill,g_auto,w_1200,h_630,q_auto/v1781879164/ArumaLodge/Hero_bgsjtf.jpg",
           width: 1200,
           height: 630,
+          type: "image/jpeg",
           alt: "Aruma Lodge — Puerto Iguazú",
         },
       ],
