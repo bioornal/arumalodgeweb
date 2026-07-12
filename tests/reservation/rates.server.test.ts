@@ -28,8 +28,8 @@ describe("getRatesForRange", () => {
     const rates = await getRatesForRange("2026-07-02", "2026-07-05", 6);
     const yvyra = rates.find((r) => r.unit.slug === "yvyra")!;
     expect(yvyra.total).toBe(pricePerNight("yvyra", 6) * 3 + CLEANING_FEE);
-    expect(pricePerNight("yvyra", 6)).toBe(150000);
-    expect(pricePerNight("mberu", 6)).toBe(250000);
+    expect(pricePerNight("yvyra", 6)).toBe(200000);
+    expect(pricePerNight("mberu", 6)).toBe(150000);
   });
 
   it("tatu tiene tarifa plana sin importar el número de huéspedes", async () => {
