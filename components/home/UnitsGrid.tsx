@@ -14,7 +14,7 @@ export function UnitsGrid() {
 
   return (
     <section id="departamentos" className="relative bg-arena-clara py-16 md:py-[130px]">
-      <SelvaFigure kind="hoja" className="bottom-8 left-[3%] -rotate-12" size={150} />
+      <SelvaFigure kind="hoja" className="bottom-2 left-[2%] -rotate-12" size={110} />
       <div className="relative z-[1] mx-auto max-w-[1320px] px-5 md:px-12">
         {/* Section header */}
         <div className="mb-[44px] md:mb-[60px] flex flex-wrap items-end justify-between gap-6">
