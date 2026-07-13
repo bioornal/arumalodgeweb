@@ -47,16 +47,20 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" });
   const title = t("title");
   const description = t("description");
+  const siteUrl = "https://aruma-lodge.netlify.app";
+  const canonicalUrl = `${siteUrl}/${locale}`;
   return {
     title,
     description,
     alternates: {
+      canonical: canonicalUrl,
       languages: { es: "/es", en: "/en", pt: "/pt" },
     },
     openGraph: {
       title,
       description,
       type: "website",
+      url: canonicalUrl,
       locale: { es: "es_AR", en: "en_US", pt: "pt_BR" }[locale] ?? "es_AR",
       siteName: "Aruma Lodge",
       images: [
@@ -73,6 +77,9 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
+      images: [
+        "https://res.cloudinary.com/djtvjkcu6/image/upload/c_fill,g_auto,w_1200,h_630,q_auto/v1781879164/ArumaLodge/Hero_bgsjtf.jpg",
+      ],
     },
   };
 }
