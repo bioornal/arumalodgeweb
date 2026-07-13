@@ -93,7 +93,7 @@
     },
     "mberu": {
       "name": "Departamento Mberú",
-      "sub": "hasta 6 huéspedes · 2 dormitorios · en planta alta · balcón con vista a la pileta · cocina equipada · wifi"
+      "sub": "hasta 6 huéspedes · 2 dormitorios · 2 baños (uno en suite) · en planta alta · balcón con vista a la pileta · cocina equipada · wifi"
     },
     "tatu": {
       "name": "Cabaña Tatú",
@@ -220,7 +220,7 @@
     "spaceTitle": "El espacio",
     "spaceBody": {
       "yvyra": "Un dúplex pensado para grupos y familias: 3 habitaciones (2 con cama matrimonial y una con 3 camas individuales) y un sofá en la sala de estar, hasta 8 huéspedes. 3 baños, cocina equipada, sala comedor y dormitorios en planta alta. Con estacionamiento gratuito en el predio y acceso a la piscina con jacuzzi hidromasaje, en pleno centro de Puerto Iguazú y a minutos de las Cataratas.",
-      "mberu": "Un departamento luminoso en planta alta: 2 dormitorios, baño completo, cocina equipada, living y comedor, y un balcón con vista a la pileta. Con acceso a la piscina, en pleno centro de Puerto Iguazú y a minutos de las Cataratas.",
+      "mberu": "Un departamento luminoso en planta alta: 2 dormitorios, 2 baños (uno en suite), cocina equipada, living y comedor, y un balcón con vista a la pileta. Con acceso a la piscina, en pleno centro de Puerto Iguazú y a minutos de las Cataratas.",
       "tatu": "Una cabaña con todo lo necesario: dos habitaciones, baño completo, cocina equipada completa y lavadero con lavarropas. Con acceso a la piscina, en pleno centro de Puerto Iguazú y a minutos de las Cataratas."
     },
     "featuresTitle": "Características",
@@ -237,8 +237,7 @@
       "Cocina equipada",
       "Ropa de cama premium",
       "Amenities de primera",
-      "Smart TV",
-      "Limpieza diaria"
+      "Smart TV"
     ],
     "bookTitle": "Reservar",
     "perNight": "/ noche",
@@ -283,7 +282,7 @@
     },
     "units": {
       "yvyra": "hasta 8 huéspedes · dúplex 3 habitaciones · 3 baños · cocina equipada · wifi",
-      "mberu": "hasta 6 huéspedes · 2 dormitorios · en planta alta · cocina equipada · wifi",
+      "mberu": "hasta 6 huéspedes · 2 dormitorios · 2 baños (uno en suite) · en planta alta · cocina equipada · wifi",
       "tatu": "hasta 5 plazas · 2 habitaciones · 1 baño · cocina completa · lavarropas · wifi · DirectTV"
     },
     "chooseStay": "Elegí tu alojamiento",

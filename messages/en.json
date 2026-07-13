@@ -93,7 +93,7 @@
     },
     "mberu": {
       "name": "Departamento Mberú",
-      "sub": "up to 6 guests · 2 bedrooms · upper floor · balcony overlooking the pool · equipped kitchen · wifi"
+      "sub": "up to 6 guests · 2 bedrooms · 2 bathrooms (one en-suite) · upper floor · balcony overlooking the pool · equipped kitchen · wifi"
     },
     "tatu": {
       "name": "Cabaña Tatú",
@@ -220,7 +220,7 @@
     "spaceTitle": "The space",
     "spaceBody": {
       "yvyra": "A duplex designed for groups and families: 3 bedrooms (2 with a double bed and one with 3 single beds) plus a sofa in the living room, for up to 8 guests. 3 bathrooms, equipped kitchen, dining room and bedrooms on the upper floor. With free on-site parking and access to the pool with hydromassage jacuzzi, in the heart of Puerto Iguazú and minutes from the Falls.",
-      "mberu": "A bright upper-floor apartment: 2 bedrooms, a full bathroom, an equipped kitchen, living and dining rooms, and a balcony overlooking the pool. With pool access, in the heart of Puerto Iguazú and minutes from the Falls.",
+      "mberu": "A bright upper-floor apartment: 2 bedrooms, 2 bathrooms (one en-suite), an equipped kitchen, living and dining rooms, and a balcony overlooking the pool. With pool access, in the heart of Puerto Iguazú and minutes from the Falls.",
       "tatu": "A cabin with everything you need: two bedrooms, a full bathroom, a fully equipped kitchen and a laundry room with washer. With pool access, in the heart of Puerto Iguazú and minutes from the Falls."
     },
     "featuresTitle": "Features",
@@ -237,8 +237,7 @@
       "Equipped kitchen",
       "Premium bed linen",
       "First-class amenities",
-      "Smart TV",
-      "Daily cleaning"
+      "Smart TV"
     ],
     "bookTitle": "Book",
     "perNight": "/ night",
@@ -283,7 +282,7 @@
     },
     "units": {
       "yvyra": "up to 8 guests · 3-bedroom duplex · 3 bathrooms · equipped kitchen · wifi",
-      "mberu": "up to 6 guests · 2 bedrooms · upper floor · equipped kitchen · wifi",
+      "mberu": "up to 6 guests · 2 bedrooms · 2 bathrooms (one en-suite) · upper floor · equipped kitchen · wifi",
       "tatu": "up to 5 guests · 2 bedrooms · 1 bathroom · full kitchen · washer · wifi · DirectTV"
     },
     "chooseStay": "Choose your stay",
