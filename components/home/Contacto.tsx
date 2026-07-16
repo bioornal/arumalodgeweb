@@ -141,7 +141,7 @@ export function Contacto() {
                     className="no-underline transition-colors duration-[250ms] hover:text-terracota"
                     style={{ color: "#4a463f" }}
                   >
-                    +54 9 3757 419667
+                    +54 9 3757 652002
                   </a>
                   <span style={{ color: "#6b665d" }}>{t("checkInOut")}</span>
                 </div>

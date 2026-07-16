@@ -37,6 +37,6 @@ describe("waLink", () => {
   });
 
   it("el número es el real del lodge", () => {
-    expect(WHATSAPP_NUMBER).toBe("5493757419667");
+    expect(WHATSAPP_NUMBER).toBe("5493757652002");
   });
 });

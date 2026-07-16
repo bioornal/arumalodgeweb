@@ -14,6 +14,7 @@
 - `.env.local` tiene `NEXT_PUBLIC_BOOKING_MODE=whatsapp` (reserva online pausada, CTAs derivan a WhatsApp).
 
 ## Cambios recientes
+- **2026-07-16:** Corrección de número de WhatsApp/teléfono de `5493757419667` (+54 9 3757 419667) a `5493757652002` (+54 9 3757 652002). Mismos archivos que el cambio del 2026-07-11.
 - **2026-07-11:** Cambio de número de WhatsApp/teléfono de `5493548403786` (+54 9 3548 40-3786) a `5493757419667` (+54 9 3757 419667).
   - Commit local: `8d944c2` (sin push — el usuario no quiere usar GitHub).
   - Archivos editados:
@@ -26,7 +27,7 @@
   - Tests `booking-mode` pasan (5/5).
 
 ## Datos de contacto del lodge
-- WhatsApp: +54 9 3757 419667 (`wa.me/5493757419667`)
+- WhatsApp: +54 9 3757 652002 (`wa.me/5493757652002`)
 - Email: arumalodge.iguazu@gmail.com
 - Centralizados en `lib/contact.ts`.
 

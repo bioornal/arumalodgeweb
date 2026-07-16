@@ -26,7 +26,7 @@ const LODGING_JSONLD = {
     addressCountry: "AR",
   },
   geo: { "@type": "GeoCoordinates", latitude: -25.6159, longitude: -54.5744 },
-  telephone: "+54 9 3757 419667",
+  telephone: "+54 9 3757 652002",
   email: "arumalodge.iguazu@gmail.com",
   priceRange: "$$",
   aggregateRating: undefined,

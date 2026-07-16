@@ -187,7 +187,7 @@ llamado desde `app/api/payments/route.ts`, `app/api/webhooks/mercadopago/route.t
 ### Datos de contacto reales
 - **Archivos:** `components/layout/SiteFooter.tsx`, `components/layout/WhatsAppFab.tsx`, `components/home/Contacto.tsx`, `components/home/CtaReserva.tsx`
 - **Datos:** centralizados en `lib/contact.ts` (`WHATSAPP_NUMBER`, `CONTACT_EMAIL`, `CONTACT_PHONE_HREF`, `waLink`).
-  - WhatsApp: `5493757419667` (+54 9 3757 419667)
+  - WhatsApp: `5493757652002` (+54 9 3757 652002)
   - Email: `arumalodge.iguazu@gmail.com`
 
 ### Traducciones EN/PT
