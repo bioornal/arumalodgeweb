@@ -29,10 +29,20 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     // para publicar la instancia via contexto (un unico re-render).
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLenis(instance);
-    return () => {
+    let dead = false;
+    const destroy = () => {
+      if (dead) return;
+      dead = true;
       gsap.ticker.remove(raf);
       instance.destroy();
       setLenis(null);
+    };
+    // FxWatchdog degrada en vivo sin recargar: el smooth scroll (RAF
+    // permanente) es lo primero que tiene que morir
+    window.addEventListener("aruma:fx-degrade", destroy);
+    return () => {
+      window.removeEventListener("aruma:fx-degrade", destroy);
+      destroy();
     };
   }, []);
 

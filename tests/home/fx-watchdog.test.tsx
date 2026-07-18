@@ -64,13 +64,19 @@ describe("FxWatchdog", () => {
     expect(rafQueue).toHaveLength(0);
   });
 
-  it("degrada (flag + reload) cuando el FPS medido queda bajo el umbral", () => {
+  it("degrada EN VIVO (flag + data-fx + evento, SIN reload) con FPS bajo el umbral", () => {
+    const degradeEvent = vi.fn();
+    window.addEventListener("aruma:fx-degrade", degradeEvent);
     mountAndWarmup();
     // frame ancla + frames a ~10fps durante 2s
     flushFrame(1000);
     for (let t = 1100; t <= 3200; t += 100) flushFrame(t);
     expect(localStorage.getItem(FX_OFF_KEY)).not.toBeNull();
-    expect(reloadSpy).toHaveBeenCalled();
+    expect(document.documentElement.dataset.fx).toBe("");
+    expect(degradeEvent).toHaveBeenCalled();
+    // recargar en plena agonía duplicaba el costo de carga: nunca más
+    expect(reloadSpy).not.toHaveBeenCalled();
+    window.removeEventListener("aruma:fx-degrade", degradeEvent);
   });
 
   it("no degrada cuando el FPS es sano", () => {
@@ -87,7 +93,8 @@ describe("FxWatchdog", () => {
     // rAF encolado pero ningún frame llega a dispararse (compositor colgado)
     vi.advanceTimersByTime(4500);
     expect(localStorage.getItem(FX_OFF_KEY)).not.toBeNull();
-    expect(reloadSpy).toHaveBeenCalled();
+    expect(document.documentElement.dataset.fx).toBe("");
+    expect(reloadSpy).not.toHaveBeenCalled();
   });
 
   it("deadman: no dispara si la muestra ya terminó con veredicto sano", () => {

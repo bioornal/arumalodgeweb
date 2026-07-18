@@ -16,11 +16,12 @@ const DEADMAN_MS = 4000;
 
 /**
  * Auto-degradado de efectos: mide los FPS reales al cargar y, si la máquina
- * no llega a MIN_FPS, graba FX_OFF_KEY y recarga. El script inline del layout
- * lee ese flag ANTES de hidratar y arranca con data-fx="" (todo apagado, el
- * mismo mecanismo de ?sinfx=1), así que tras la recarga los efectos nunca
- * llegan a montarse. El flag vence a las 24h para que una máquina que tuvo
- * un mal día recupere los efectos sola.
+ * no llega a MIN_FPS (o el deadman vence sin muestra completa), degrada EN
+ * VIVO: data-fx="" + evento aruma:fx-degrade, sin recargar. Además graba
+ * FX_OFF_KEY, que el script inline del layout lee ANTES de hidratar en las
+ * cargas siguientes para arrancar con data-fx="" (mismo mecanismo de
+ * ?sinfx=1) y que los efectos ni lleguen a montarse. El flag vence a las
+ * 24h para que una máquina que tuvo un mal día recupere los efectos sola.
  *
  * No corre si data-fx ya está presente (modo diagnóstico por URL, o ya
  * degradado: sin efectos los FPS no dicen nada) ni con reduced motion. La
@@ -45,14 +46,21 @@ export function FxWatchdog() {
     };
     document.addEventListener("visibilitychange", onVisibility);
 
+    // Alivio inmediato SIN recargar: un reload en plena agonía duplica el
+    // costo de carga justo cuando la máquina no da más (así se pasaba de
+    // "tirón" a freeze duro). data-fx="" apaga grano + animaciones y
+    // transiciones CSS al instante (reglas en globals.css) y el evento hace
+    // que Lenis se destruya; los scrubs GSAP ya montados siguen, pero la
+    // próxima carga nace liviana gracias al flag persistido.
     const degrade = () => {
+      stop();
       try {
         localStorage.setItem(FX_OFF_KEY, String(Date.now()));
       } catch {
-        // sin storage no hay persistencia posible; recargar igual no ayuda
-        return;
+        // sin storage no persiste, pero el alivio en vivo vale igual
       }
-      window.location.reload();
+      html.dataset.fx = "";
+      window.dispatchEvent(new Event("aruma:fx-degrade"));
     };
 
     let start = -1;
