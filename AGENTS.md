@@ -14,6 +14,10 @@
 - `.env.local` tiene `NEXT_PUBLIC_BOOKING_MODE=whatsapp` (reserva online pausada, CTAs derivan a WhatsApp).
 
 ## Cambios recientes
+- **2026-07-18:**
+  - `Experiencias` rediseñada como banda cinematográfica full-bleed: la foto real `Iguazu_Cataratas2.jpg` (única del destino en el bucket) es la protagonista en su formato panorámico con parallax + caption (`experiencias.caption` en messages); los 4 ítems van en una tira editorial debajo, sin imágenes propias. Se descartó la lista interactiva con crossfade (y las fotos interim de Unsplash) para no competir con la foto real.
+  - `RelatoImagenes`: PHOTOS reordenado al orden visual de la grilla → numeración 01–10 correlativa y consistente con el contador del lightbox.
+  - `SiteNav`: fondo `bg-marfil` fijo siempre (se eliminó el estado translúcido inicial y el listener de scroll).
 - **2026-07-16:** Corrección de número de WhatsApp/teléfono de `5493757419667` (+54 9 3757 419667) a `5493757652002` (+54 9 3757 652002). Mismos archivos que el cambio del 2026-07-11.
 - **2026-07-11:** Cambio de número de WhatsApp/teléfono de `5493548403786` (+54 9 3548 40-3786) a `5493757419667` (+54 9 3757 419667).
   - Commit local: `8d944c2` (sin push — el usuario no quiere usar GitHub).
