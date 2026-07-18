@@ -82,6 +82,22 @@ describe("FxWatchdog", () => {
     expect(reloadSpy).not.toHaveBeenCalled();
   });
 
+  it("deadman: degrada si rAF muere y la muestra nunca se completa (freeze instantáneo)", () => {
+    mountAndWarmup();
+    // rAF encolado pero ningún frame llega a dispararse (compositor colgado)
+    vi.advanceTimersByTime(4500);
+    expect(localStorage.getItem(FX_OFF_KEY)).not.toBeNull();
+    expect(reloadSpy).toHaveBeenCalled();
+  });
+
+  it("deadman: no dispara si la muestra ya terminó con veredicto sano", () => {
+    mountAndWarmup();
+    flushFrame(1000);
+    for (let t = 1016; t <= 3100; t += 16) flushFrame(t);
+    vi.advanceTimersByTime(6000);
+    expect(reloadSpy).not.toHaveBeenCalled();
+  });
+
   it("aborta la medición si la pestaña pasa a segundo plano (rAF throttled daría falso positivo)", () => {
     mountAndWarmup();
     flushFrame(1000);

@@ -9,6 +9,10 @@ export const FX_OFF_KEY = "aruma-fx-off";
 const MIN_FPS = 24;
 const WARMUP_MS = 600;
 const SAMPLE_MS = 1800;
+// Deadman: si para entonces la muestra no terminó, rAF está muerto o casi
+// (freeze duro con el compositor colgado) y se degrada sin esperar veredicto.
+// Los setTimeout siguen corriendo aunque el pintado esté clavado.
+const DEADMAN_MS = 4000;
 
 /**
  * Auto-degradado de efectos: mide los FPS reales al cargar y, si la máquina
@@ -53,6 +57,7 @@ export function FxWatchdog() {
 
     let start = -1;
     let frames = 0;
+    let deadman = 0;
     const loop = (ts: number) => {
       if (stopped) return;
       if (start < 0) {
@@ -61,6 +66,7 @@ export function FxWatchdog() {
         frames++;
         const elapsed = ts - start;
         if (elapsed >= SAMPLE_MS) {
+          stop(); // muestra completa: desarma el deadman antes del veredicto
           if ((frames * 1000) / elapsed < MIN_FPS) degrade();
           return;
         }
@@ -69,12 +75,17 @@ export function FxWatchdog() {
     };
 
     const warmup = window.setTimeout(() => {
-      if (!stopped && !document.hidden) raf = requestAnimationFrame(loop);
+      if (stopped || document.hidden) return;
+      raf = requestAnimationFrame(loop);
+      deadman = window.setTimeout(() => {
+        if (!stopped) degrade();
+      }, DEADMAN_MS);
     }, WARMUP_MS);
 
     return () => {
       stop();
       window.clearTimeout(warmup);
+      window.clearTimeout(deadman);
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
