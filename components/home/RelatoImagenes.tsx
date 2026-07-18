@@ -11,13 +11,15 @@ import { GalleryLightbox, type GalleryItem } from "./GalleryLightbox";
 /**
  * Relato en imágenes — grilla bento compacta con las diez fotos reales del
  * bucket "Aruma-fotos/Complejo". Todas visibles; cada tile abre el lightbox
- * en su índice. El orden de PHOTOS es el orden narrativo (numeración 01–10).
+ * en su índice. El orden de PHOTOS sigue el orden visual de la grilla, así la
+ * numeración 01–10 es correlativa en pantalla y coincide con el contador
+ * del lightbox (y la navegación prev/next respeta ese mismo orden).
  */
 const PHOTOS: GalleryItem[] = [
-  { label: "La llegada", photo: "Complejo/5.jpg" },          // 0 · pileta + dracaena
-  { label: "El descenso", photo: "Complejo/16.jpg" },        // 1 · escalera otoñal
-  { label: "El agua", photo: "Complejo/7.jpg" },             // 2 · borde ocre (H)
-  { label: "El refugio", photo: "Complejo/10.jpg" },         // 3 · cabaña A-frame
+  { label: "El agua", photo: "Complejo/7.jpg" },             // 0 · borde ocre (H)
+  { label: "La llegada", photo: "Complejo/5.jpg" },          // 1 · pileta + dracaena
+  { label: "El refugio", photo: "Complejo/10.jpg" },         // 2 · cabaña A-frame
+  { label: "El descenso", photo: "Complejo/16.jpg" },        // 3 · escalera otoñal
   { label: "La selva alrededor", photo: "Complejo/4.jpg" },  // 4 · orquídeas + arce
   { label: "Iris de la selva", photo: "Complejo/2.jpg" },    // 5 · iris con rocío
   { label: "Heliconia", photo: "Complejo/1.jpg" },           // 6 · pinza de langosta
@@ -28,10 +30,10 @@ const PHOTOS: GalleryItem[] = [
 
 /** Tiles de la grilla (orden = colocación en el grid). `at` apunta a PHOTOS. */
 const TILES: { key: string; at: number; span: string; pos?: string }[] = [
-  { key: "agua", at: 2, span: "col-span-2 row-span-1 md:row-span-2" },          // hero H
-  { key: "llegada", at: 0, span: "col-span-1 row-span-2", pos: "50% 45%" },     // tall V
-  { key: "refugio", at: 3, span: "col-span-1 row-span-2", pos: "50% 22%" },     // tall V
-  { key: "descenso", at: 1, span: "col-span-1 row-span-1", pos: "50% 62%" },
+  { key: "agua", at: 0, span: "col-span-2 row-span-1 md:row-span-2" },          // hero H
+  { key: "llegada", at: 1, span: "col-span-1 row-span-2", pos: "50% 45%" },     // tall V
+  { key: "refugio", at: 2, span: "col-span-1 row-span-2", pos: "50% 22%" },     // tall V
+  { key: "descenso", at: 3, span: "col-span-1 row-span-1", pos: "50% 62%" },
   { key: "selva", at: 4, span: "col-span-1 row-span-1", pos: "50% 30%" },
   { key: "iris", at: 5, span: "col-span-1 row-span-1", pos: "50% 52%" },
   { key: "heliconia", at: 6, span: "col-span-1 row-span-1", pos: "50% 42%" },
