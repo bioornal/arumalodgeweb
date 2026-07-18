@@ -11,19 +11,11 @@ const LOGO_URL =
 
 export function SiteNav() {
   const t = useTranslations("nav");
-  const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const active = useSectionSpy();
   const pathname = usePathname();
   const isHome = pathname === "/";
   const sectionHref = (id: string) => (isHome ? `#${id}` : `/#${id}`);
-
-  useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Bloquea el scroll del body cuando el drawer está abierto
   useEffect(() => {
@@ -78,12 +70,7 @@ export function SiteNav() {
         aria-hidden="true"
       />
     <nav
-      className={[
-        "fixed top-0 left-0 right-0 z-50 border-b border-[#E7E0D4] transition-[background-color,box-shadow] duration-300",
-        solid || open
-          ? "bg-marfil shadow-[0_1px_40px_-24px_rgba(29,29,29,.45)]"
-          : "bg-[rgba(248,245,240,.86)] backdrop-blur-[14px] shadow-[0_1px_40px_-24px_rgba(29,29,29,.2)]",
-      ].join(" ")}
+      className="fixed top-0 left-0 right-0 z-50 border-b border-[#E7E0D4] bg-marfil shadow-[0_1px_40px_-24px_rgba(29,29,29,.45)]"
     >
       <div className="max-w-[1320px] mx-auto px-5 md:px-12 py-2 flex items-center justify-between gap-5">
         {/* LEFT — desktop nav links / mobile: hamburger */}
