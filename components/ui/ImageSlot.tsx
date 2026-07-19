@@ -15,17 +15,18 @@ const REAL_PHOTOS: Record<string, string> = {
   // Departamento Mberú — la galería del detalle usa la prop `photo` (ver UnitDetail);
   // este seed solo cubre las cards (home, tarifas, otros alojamientos).
   "departamento-mberu": "Dpto1/20.jpg", // living con sofá y Smart TV (portada)
-  // Cabaña Tatú
+  // Cabaña Tatú — la galería del detalle usa la prop `photo` (ver UnitDetail);
+  // estos seeds cubren las cards y el layout de fallback.
   "cabana-tatu": "Casa/18.jpg", // lateral con jardín
   "cabana-tatu-interior": "Casa/1.jpg", // comedor
-  "cabana-tatu-dormitorio": "Casa/5.jpg", // dormitorio principal
+  "cabana-tatu-dormitorio": "Casa/15.jpg", // dormitorio principal con cama matrimonial
   "cabana-tatu-bano": "Casa/13.jpg", // baño
   "cabana-tatu-terraza": "Casa/18.jpg", // lateral con jardín
   "cabana-tatu-piscina": "Casa/22.jpg", // pileta con la cabaña de fondo
-  "cabana-tatu-amenities": "Casa/8.jpg", // cocina equipada
+  "cabana-tatu-amenities": "Casa/5.jpg", // estar con sillones
   "cabana-tatu-living": "Casa/4.jpg", // living con TV
-  "cabana-tatu-cocina": "Casa/15.jpg", // cocina completa
-  "cabana-tatu-segundo-dormitorio": "Casa/7.jpg", // dormitorio con cuchetas
+  "cabana-tatu-cocina": "Casa/7.jpg", // cocina equipada
+  "cabana-tatu-segundo-dormitorio": "Casa/8.jpg", // dormitorio con cucheta
   "cabana-tatu-comedor": "Casa/2.jpg", // comedor con ventana a la pileta
   "cabana-tatu-estar": "Casa/3.jpg", // comedor y vajillero
   // Galería del home
@@ -43,6 +44,22 @@ const PHOTO_TWEAKS: Record<string, { filter?: string; position?: string }> = {
   // así que sesgamos el recorte hacia arriba para no mostrar solo el piso de rejilla.
   "Dpto1/22.jpg": {
     position: "50% 25%",
+  },
+  // Living de la cabaña: tomas con luz tenue y madera oscura, las levantamos un poco.
+  "Casa/4.jpg": {
+    filter: "brightness(1.1) saturate(1.05)",
+  },
+  "Casa/5.jpg": {
+    filter: "brightness(1.12) saturate(1.05)",
+  },
+  // El vajillero está corrido a la izquierda del encuadre.
+  "Casa/3.jpg": {
+    position: "38% 50%",
+  },
+  // Foto muy vertical de la pileta: en recortes cuadrados priorizamos la cabaña
+  // del tercio superior sobre el agua del primer plano.
+  "Casa/22.jpg": {
+    position: "50% 30%",
   },
 };
 

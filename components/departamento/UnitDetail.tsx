@@ -124,9 +124,27 @@ const MBERU_PHOTOS: GalleryPhoto[] = [
   { photo: "Dpto1/22.jpg", alt: "Balcón con vista a la pileta", span: "tall" },
 ];
 
+// Cabaña Tatú — carpeta Casa del bucket (11 fotos: 1-5, 7, 8, 13, 15, 18, 22).
+// Dormitorios y baño van arriba y en formato grande (tall/wide) para darles
+// protagonismo; la cuadrícula cierra pareja (4×5 desktop, 2×10 mobile).
+const TATU_PHOTOS: GalleryPhoto[] = [
+  { photo: "Casa/1.jpg", alt: "Comedor con vista al estar y la TV", span: "hero" },
+  { photo: "Casa/8.jpg", alt: "Segundo dormitorio con cucheta", span: "tall" },
+  { photo: "Casa/13.jpg", alt: "Baño completo con espejo y luz de tocador", span: "tall" },
+  { photo: "Casa/15.jpg", alt: "Dormitorio principal con cama matrimonial", span: "wide" },
+  { photo: "Casa/4.jpg", alt: "Living con sillones, TV y aire acondicionado", span: "tall" },
+  { photo: "Casa/7.jpg", alt: "Cocina equipada con heladera y mesada completa", span: "wide" },
+  { photo: "Casa/2.jpg", alt: "Comedor junto a la ventana con vista a la pileta", span: "tall" },
+  { photo: "Casa/3.jpg", alt: "Comedor con vajillero de madera" },
+  { photo: "Casa/5.jpg", alt: "Estar con sillones de madera" },
+  { photo: "Casa/22.jpg", alt: "Pileta con la cabaña de fondo" },
+  { photo: "Casa/18.jpg", alt: "Lateral de la cabaña con jardín" },
+];
+
 const UNIT_GALLERY: Partial<Record<UnitSlug, GalleryPhoto[]>> = {
   yvyra: YVYRA_PHOTOS,
   mberu: MBERU_PHOTOS,
+  tatu: TATU_PHOTOS,
 };
 
 const SPAN_CLS: Record<NonNullable<GalleryPhoto["span"]>, string> = {

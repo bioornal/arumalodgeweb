@@ -59,8 +59,9 @@ export function Hero() {
         }}
       />
 
-      {/* Content */}
-      <div className="pointer-events-none relative z-[3] mx-auto flex h-full max-w-[1240px] flex-col items-center justify-end text-center px-5 md:px-12"
+      {/* Content — en mobile todo a la izquierda (el H1 de 14ch ya llena el
+          ancho y el kicker/sub centrados parecían desalineados); centrado desde md */}
+      <div className="pointer-events-none relative z-[3] mx-auto flex h-full max-w-[1240px] flex-col items-start justify-end text-left px-5 md:items-center md:px-12 md:text-center"
         style={{ paddingBottom: "clamp(96px, 18vh, 132px)" }}
       >
         <HeroScrollFade>
@@ -85,11 +86,12 @@ export function Hero() {
             {t("title")}
           </h1>
 
-          {/* Subtitle */}
+          {/* Subtitle — text-balance reparte el quiebre en 2 líneas parejas
+              (evita la palabra viuda "Cataratas." sola en la segunda línea) */}
           <p
-            className="font-display italic font-light"
+            className="font-display italic font-light text-balance"
             style={{
-              fontSize: "clamp(16px,2.1vw,24px)",
+              fontSize: "clamp(18px,2.1vw,24px)",
               color: "#E8E1D5",
               margin: "22px 0 0",
             }}
