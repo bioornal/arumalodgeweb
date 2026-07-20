@@ -31,11 +31,16 @@ export default async function AdminReservasPage({
         <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500, fontSize: 30, margin: 0 }}>
           Reservas
         </h1>
-        <form action={signOut}>
-          <button type="submit" style={{ background: "transparent", border: "1px solid #E7E0D4", borderRadius: 4, padding: "8px 14px", fontSize: 13, cursor: "pointer", color: "#6b665d" }}>
-            Cerrar sesión
-          </button>
-        </form>
+        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+          <a href="/admin/pago-prueba" style={{ fontSize: 13, color: "#6b665d", border: "1px solid #E7E0D4", borderRadius: 4, padding: "8px 14px", textDecoration: "none" }}>
+            Pago de prueba
+          </a>
+          <form action={signOut}>
+            <button type="submit" style={{ background: "transparent", border: "1px solid #E7E0D4", borderRadius: 4, padding: "8px 14px", fontSize: 13, cursor: "pointer", color: "#6b665d" }}>
+              Cerrar sesión
+            </button>
+          </form>
+        </div>
       </div>
 
       <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>

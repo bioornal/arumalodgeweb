@@ -14,6 +14,20 @@
 - `.env.local` tiene `NEXT_PUBLIC_BOOKING_MODE=whatsapp` (reserva online pausada, CTAs derivan a WhatsApp).
 
 ## Cambios recientes
+- **2026-07-20 (pago de prueba):**
+  - **`/admin/pago-prueba`** (+ endpoint `/api/admin/test-payment`, + link desde
+    `/admin/reservas`): cobro REAL de **$1.000 ARS fijo en el server** con el mismo
+    Payment Brick del checkout, para validar credenciales productivas de MP
+    (tokenización + cobro + webhook firmado) SIN crear reserva (metadata
+    `{test_payment:true}` sin `unit_id` → el webhook hace no-op) y SIN depender del
+    modo WhatsApp (el 503 vive solo en `/api/payments`). Reembolso manual desde la
+    actividad de MP. Spec: `docs/superpowers/specs/2026-07-20-admin-pago-prueba-design.md`.
+    Flujo de lanzamiento: probar acá con credenciales `APP_USR-` → reembolsar →
+    recién entonces quitar `NEXT_PUBLIC_BOOKING_MODE` y abrir el checkout.
+- **2026-07-20 (social):** Links de redes en `Contacto.tsx` apuntaban a `#contacto`
+  (placeholder). Ahora ambos íconos (Instagram y Facebook) llevan a
+  `https://www.instagram.com/arumalodgeiguazu` — Facebook aún no existe.
+  Nueva constante `INSTAGRAM_URL` en `lib/contact.ts`. Commit `ad06963` (pusheado).
 - **2026-07-20 (más tarde):**
   - **Efectos REACTIVADOS** (`FX_DEFAULT = null`): el diagnóstico del freeze terminó
     **exonerando al sitio** — la escalera de canarios estáticos (`/canary.html`,
