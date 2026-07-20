@@ -3,8 +3,9 @@ import { isRangeAvailable, createPendingEvent, deleteEvent } from "@/lib/reserva
 import { uploadComprobante, removeComprobante, isAllowedMime, MAX_BYTES } from "@/lib/reservation/comprobante.server";
 import { insertReservation } from "@/lib/reservation/reservations.server";
 import { generateBookingCode } from "@/lib/reservation/code";
-import { getUnit, CLEANING_FEE, pricePerNight } from "@/lib/units";
+import { getUnit } from "@/lib/units";
 import { computeNights, computeTotal } from "@/lib/reservation/pricing";
+import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 import { isValidEmail } from "@/lib/reservation/validation";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
 import type { UnitId } from "@/lib/reservation/reducer";
@@ -75,7 +76,8 @@ export async function POST(req: Request) {
   const unit = getUnit(unitId)!;
   if (guests > unit.specs.guests) return bad();
   const nights = computeNights(new Date(checkIn), new Date(checkOut));
-  const total = computeTotal(pricePerNight(unit.slug, guests), nights, CLEANING_FEE);
+  const settings = await getRateSettings();
+  const total = computeTotal(settings.nightly[unit.slug], nights, settings.cleaningFee);
 
   // 1. Re-chequeo de disponibilidad (fail-closed).
   let available: boolean;

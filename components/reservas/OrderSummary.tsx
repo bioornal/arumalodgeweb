@@ -1,7 +1,8 @@
 import { useTranslations } from "next-intl";
 import { format } from "date-fns";
 import type { State } from "@/lib/reservation/reducer";
-import { getUnit, CLEANING_FEE, pricePerNight } from "@/lib/units";
+import { getUnit } from "@/lib/units";
+import type { RateSettings } from "@/lib/reservation/rate-settings";
 import {
   computeNights,
   computeSubtotal,
@@ -12,15 +13,16 @@ const money = (n: number) => "$" + new Intl.NumberFormat("es-AR").format(n);
 
 interface OrderSummaryProps {
   state: State;
+  settings: RateSettings;
 }
 
-export function OrderSummary({ state }: OrderSummaryProps) {
+export function OrderSummary({ state, settings }: OrderSummaryProps) {
   const t = useTranslations("reservas");
   const unit = getUnit(state.unitId)!;
   const nights = computeNights(state.checkIn, state.checkOut);
-  const nightly = pricePerNight(state.unitId, state.guests);
+  const nightly = settings.nightly[state.unitId];
   const subtotal = computeSubtotal(nightly, nights);
-  const total = computeTotal(nightly, nights, CLEANING_FEE);
+  const total = computeTotal(nightly, nights, settings.cleaningFee);
 
   // Format date range
   const formatDate = (d: Date) => format(d, "d MMM");
@@ -98,7 +100,7 @@ export function OrderSummary({ state }: OrderSummaryProps) {
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14 }}>
           <span style={{ color: "#9fb0a3" }}>{t("cleaning")}</span>
           <span style={{ color: "#F8F5F0" }}>
-            {nights > 0 ? money(CLEANING_FEE) : "—"}
+            {nights > 0 ? money(settings.cleaningFee) : "—"}
           </span>
         </div>
       </div>

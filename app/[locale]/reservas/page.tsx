@@ -4,6 +4,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { routing } from "@/lib/i18n/routing";
 import { ReservaFlow } from "@/components/reservas/ReservaFlow";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
+import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -42,10 +43,12 @@ export default async function ReservasPage({
     redirect(`/${locale}/tarifas`);
   }
 
+  const settings = await getRateSettings();
+
   return (
     <main>
       <Suspense fallback={null}>
-        <ReservaFlow />
+        <ReservaFlow settings={settings} />
       </Suspense>
     </main>
   );

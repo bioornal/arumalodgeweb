@@ -159,7 +159,15 @@ function useFeatValues(slug: UnitSlug, locale: string) {
   return UNIT_FEAT[slug];
 }
 
-export function UnitDetail({ unit, locale }: { unit: Unit; locale: string }) {
+export function UnitDetail({
+  unit,
+  locale,
+  prices,
+}: {
+  unit: Unit;
+  locale: string;
+  prices: Record<UnitSlug, number>; // tarifa actual por noche (DB, vía getRateSettings)
+}) {
   const t = useTranslations("departamento");
   const tn = useTranslations("nav");
   const feat = useFeatValues(unit.slug as UnitSlug, locale);
@@ -363,7 +371,7 @@ export function UnitDetail({ unit, locale }: { unit: Unit; locale: string }) {
           </div>
 
           {/* RIGHT — sticky booking card */}
-          <StickyBookingCard unit={unit} />
+          <StickyBookingCard unit={unit} price={prices[unit.slug]} />
         </div>
       </section>
 
@@ -402,7 +410,7 @@ export function UnitDetail({ unit, locale }: { unit: Unit; locale: string }) {
                       {other.name}
                     </h3>
                     <span className="text-[13px] text-bronce">
-                      ${new Intl.NumberFormat("es-AR").format(other.price)} {t("perNight")}
+                      ${new Intl.NumberFormat("es-AR").format(prices[other.slug])} {t("perNight")}
                     </span>
                   </div>
                 </Link>

@@ -7,8 +7,9 @@ import {
   type PaymentOutcome,
 } from "@/lib/reservation/payments.server";
 import { generateBookingCode } from "@/lib/reservation/code";
-import { getUnit, CLEANING_FEE, pricePerNight } from "@/lib/units";
+import { getUnit } from "@/lib/units";
 import { computeNights, computeTotal } from "@/lib/reservation/pricing";
+import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 import { isValidEmail } from "@/lib/reservation/validation";
 import { insertReservation } from "@/lib/reservation/reservations.server";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
@@ -78,7 +79,8 @@ export async function POST(req: Request) {
   }
 
   const nights = computeNights(new Date(checkIn), new Date(checkOut));
-  const total = computeTotal(pricePerNight(unit.slug, guests as number), nights, CLEANING_FEE);
+  const settings = await getRateSettings();
+  const total = computeTotal(settings.nightly[unit.slug], nights, settings.cleaningFee);
 
   // Re-chequeo en tiempo real (fail-closed)
   let available: boolean;

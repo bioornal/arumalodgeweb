@@ -59,3 +59,27 @@ create trigger reservations_set_updated_at
 insert into storage.buckets (id, name, public)
 values ('comprobantes', 'comprobantes', false)
 on conflict (id) do nothing;
+
+-- Tarifas editables desde /admin/tarifas (fila única id=1).
+-- extra_guest_fee se guarda pero AÚN no se aplica al cálculo (tarifa plana).
+create table if not exists public.rate_settings (
+  id              smallint primary key default 1 check (id = 1),
+  nightly_yvyra   integer not null default 200000,
+  nightly_mberu   integer not null default 200000,
+  nightly_tatu    integer not null default 130000,
+  cleaning_fee    integer not null default 30000,
+  base_guests     integer not null default 4,
+  extra_guest_fee integer not null default 0,
+  updated_at      timestamptz not null default now()
+);
+
+-- Fila inicial con los mismos valores que lib/units.ts
+insert into public.rate_settings (id) values (1) on conflict (id) do nothing;
+
+-- Mismo criterio que reservations: RLS sin policies, solo service role.
+alter table public.rate_settings enable row level security;
+
+drop trigger if exists rate_settings_set_updated_at on public.rate_settings;
+create trigger rate_settings_set_updated_at
+  before update on public.rate_settings
+  for each row execute function public.set_updated_at();

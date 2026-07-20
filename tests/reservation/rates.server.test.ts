@@ -4,6 +4,15 @@ vi.mock("@/lib/reservation/availability.server", () => ({
   getAvailabilityServer: vi.fn(),
 }));
 
+// Tarifas: siempre los defaults (los mismos valores de lib/units) — el test no
+// depende de la DB ni de lo que el admin edite en /admin/tarifas.
+vi.mock("@/lib/reservation/rate-settings.server", async () => {
+  const { DEFAULT_RATE_SETTINGS } = await vi.importActual<
+    typeof import("@/lib/reservation/rate-settings")
+  >("@/lib/reservation/rate-settings");
+  return { getRateSettings: () => Promise.resolve(DEFAULT_RATE_SETTINGS) };
+});
+
 import { getAvailabilityServer } from "@/lib/reservation/availability.server";
 import { getRatesForRange } from "@/lib/reservation/rates.server";
 import { UNITS, CLEANING_FEE, pricePerNight, TATU_PRICE } from "@/lib/units";

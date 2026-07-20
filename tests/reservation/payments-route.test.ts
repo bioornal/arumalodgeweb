@@ -29,6 +29,14 @@ vi.mock("@/lib/reservation/email.server", () => ({
   sendConfirmationEmailOnce: (...a: unknown[]) => sendConfirmationEmailOnce(...a),
 }));
 
+// Tarifas: siempre los defaults — el test no depende de la DB ni del admin.
+vi.mock("@/lib/reservation/rate-settings.server", async () => {
+  const { DEFAULT_RATE_SETTINGS } = await vi.importActual<
+    typeof import("@/lib/reservation/rate-settings")
+  >("@/lib/reservation/rate-settings");
+  return { getRateSettings: () => Promise.resolve(DEFAULT_RATE_SETTINGS) };
+});
+
 import { POST } from "@/app/api/payments/route";
 
 const CARD = { token: "tok-1", paymentMethodId: "visa", installments: 1 };

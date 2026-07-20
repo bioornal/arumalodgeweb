@@ -5,16 +5,17 @@ import { useTranslations, useLocale } from "next-intl";
 import type { State } from "@/lib/reservation/reducer";
 import { createTransferReservation } from "@/lib/reservation/transfer";
 import { formatDateOnly } from "@/lib/reservation/booking";
-import { CLEANING_FEE, pricePerNight } from "@/lib/units";
+import type { RateSettings } from "@/lib/reservation/rate-settings";
 import { computeNights, computeTotal } from "@/lib/reservation/pricing";
 import { BANK_DETAILS } from "@/lib/site";
 
 interface Props {
   state: State;
+  settings: RateSettings;
   onPending: (code: string) => void;
 }
 
-export function StepTransferencia({ state, onPending }: Props) {
+export function StepTransferencia({ state, settings, onPending }: Props) {
   const t = useTranslations("reservas");
   const locale = useLocale();
   const [file, setFile] = useState<File | null>(null);
@@ -22,7 +23,7 @@ export function StepTransferencia({ state, onPending }: Props) {
   const [processing, setProcessing] = useState(false);
 
   const nights = computeNights(state.checkIn!, state.checkOut!);
-  const total = computeTotal(pricePerNight(state.unitId, state.guests), nights, CLEANING_FEE);
+  const total = computeTotal(settings.nightly[state.unitId], nights, settings.cleaningFee);
   const money = (n: number) => `$${new Intl.NumberFormat("es-AR").format(n)}`;
 
   const submit = async () => {

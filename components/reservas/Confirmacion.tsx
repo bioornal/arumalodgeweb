@@ -2,22 +2,24 @@ import { useTranslations } from "next-intl";
 import { format } from "date-fns";
 import { Link } from "@/lib/i18n/navigation";
 import type { State } from "@/lib/reservation/reducer";
-import { getUnit, CLEANING_FEE, pricePerNight } from "@/lib/units";
+import { getUnit } from "@/lib/units";
+import type { RateSettings } from "@/lib/reservation/rate-settings";
 import { computeNights, computeTotal } from "@/lib/reservation/pricing";
 
 const money = (n: number) => "$" + new Intl.NumberFormat("es-AR").format(n);
 
 interface ConfirmacionProps {
   state: State;
+  settings: RateSettings;
   code: string;
   pending?: boolean;
 }
 
-export function Confirmacion({ state, code, pending }: ConfirmacionProps) {
+export function Confirmacion({ state, settings, code, pending }: ConfirmacionProps) {
   const t = useTranslations("reservas");
   const unit = getUnit(state.unitId)!;
   const nights = computeNights(state.checkIn, state.checkOut);
-  const total = computeTotal(pricePerNight(state.unitId, state.guests), nights, CLEANING_FEE);
+  const total = computeTotal(settings.nightly[state.unitId], nights, settings.cleaningFee);
 
   const formatDate = (d: Date) => format(d, "d MMM");
   const rangeLabel =

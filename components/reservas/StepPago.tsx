@@ -6,7 +6,7 @@ import { initMercadoPago, Payment } from "@mercadopago/sdk-react";
 import type { State } from "@/lib/reservation/reducer";
 import { createPayment, type PaymentResult } from "@/lib/reservation/payments";
 import { formatDateOnly } from "@/lib/reservation/booking";
-import { CLEANING_FEE, pricePerNight } from "@/lib/units";
+import type { RateSettings } from "@/lib/reservation/rate-settings";
 import { computeNights, computeTotal } from "@/lib/reservation/pricing";
 import { StepTransferencia } from "./StepTransferencia";
 
@@ -15,11 +15,12 @@ const PUBLIC_KEY = process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY ?? "";
 
 interface StepPagoProps {
   state: State;
+  settings: RateSettings;
   onApproved: (code: string) => void;
   onPending: (code: string) => void;
 }
 
-export function StepPago({ state, onApproved, onPending }: StepPagoProps) {
+export function StepPago({ state, settings, onApproved, onPending }: StepPagoProps) {
   const t = useTranslations("reservas");
   const locale = useLocale();
   const [error, setError] = useState<string | null>(null);
@@ -27,7 +28,7 @@ export function StepPago({ state, onApproved, onPending }: StepPagoProps) {
   const [method, setMethod] = useState<"card" | "transfer">("card");
 
   const nights = computeNights(state.checkIn, state.checkOut);
-  const total = computeTotal(pricePerNight(state.unitId, state.guests), nights, CLEANING_FEE);
+  const total = computeTotal(settings.nightly[state.unitId], nights, settings.cleaningFee);
 
   useEffect(() => {
     if (!MOCK && PUBLIC_KEY) initMercadoPago(PUBLIC_KEY, { locale: "es-AR" });
@@ -98,7 +99,7 @@ export function StepPago({ state, onApproved, onPending }: StepPagoProps) {
     <div>
       <MethodTabs method={method} setMethod={setMethod} t={t} />
       {method === "transfer" ? (
-        <StepTransferencia state={state} onPending={onPending} />
+        <StepTransferencia state={state} settings={settings} onPending={onPending} />
       ) : (
         <>
           <Header t={t} total={total} />

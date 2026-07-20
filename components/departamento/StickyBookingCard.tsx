@@ -4,7 +4,7 @@ import type { Unit } from "@/lib/units";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
 import { waLink } from "@/lib/contact";
 
-export function StickyBookingCard({ unit }: { unit: Unit }) {
+export function StickyBookingCard({ unit, price }: { unit: Unit; price: number }) {
   const t = useTranslations("departamento");
   const tb = useTranslations("bookingBar");
   const whatsappMode = isWhatsAppBookingMode();
@@ -20,7 +20,7 @@ export function StickyBookingCard({ unit }: { unit: Unit }) {
         {/* Price */}
         <div className="flex items-baseline gap-2">
           <span className="font-display text-[36px] text-carbon">
-            ${new Intl.NumberFormat("es-AR").format(unit.price)}
+            ${new Intl.NumberFormat("es-AR").format(price)}
           </span>
           <span className="text-[13px] text-muted">{t("perNight")}</span>
         </div>

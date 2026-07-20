@@ -14,6 +14,29 @@
 - `.env.local` tiene `NEXT_PUBLIC_BOOKING_MODE=whatsapp` (reserva online pausada, CTAs derivan a WhatsApp).
 
 ## Cambios recientes
+- **2026-07-20 (tarifas editables desde admin):** Nueva sección **`/admin/tarifas`**
+  (link desde `/admin/reservas`) para editar precio por noche por unidad + tasa de
+  limpieza + huéspedes incluidos + cargo huésped extra. Pensado para actualizar a
+  mano cuando cambia la temporada (NO hay temporadas por rango de fechas).
+  - **Supabase:** tabla `rate_settings` (fila única id=1, RLS sin policies, trigger
+    `updated_at`) — el bloque SQL está al final de `supabase/setup.sql` y **hay que
+    correrlo en el SQL Editor del dashboard** o el guardado del admin falla (el sitio
+    público sigue andando con los defaults).
+  - **Arquitectura:** `lib/reservation/rate-settings.ts` (tipos + defaults +
+    validación + mappers, compartido) y `rate-settings.server.ts` (get/save, memo en
+    módulo TTL 30s, **fail-safe**: cualquier error de DB → defaults de `lib/units.ts`,
+    el sitio nunca rompe). Tras guardar, la server action invalida el memo y hace
+    `revalidatePath` de tarifas/reservas/departamentos (los de departamentos son SSG).
+  - **`extra_guest_fee` y `base_guests` se guardan pero NO se aplican al cálculo** —
+    el precio sigue siendo tarifa plana por unidad (decisión del usuario; activarlo a
+    futuro = sumar `(guests - baseGuests) * extraGuestFee` en los computeTotal).
+  - Los precios públicos ya NO salen de las constantes: `/tarifas`, `/departamentos/*`
+    y el wizard `/reservas` reciben `RateSettings` por props desde server components;
+    `/api/payments` y `/api/reservations/transfer` los leen server-side al cobrar.
+    `lib/units.ts` queda como fallback (UNITS/CLEANING_FEE/pricePerNight siguen ahí).
+  - Tests: mocks de `rate-settings.server` en rates/payments/transfer route tests
+    (siempre defaults); nuevo `tests/reservation/rate-settings.test.ts` (validación
+    + mappers + defaults espejan lib/units).
 - **2026-07-20 (pago de prueba):**
   - **`/admin/pago-prueba`** (+ endpoint `/api/admin/test-payment`, + link desde
     `/admin/reservas`): cobro REAL de **$1.000 ARS fijo en el server** con el mismo
