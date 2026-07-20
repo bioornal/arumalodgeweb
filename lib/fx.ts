@@ -19,19 +19,16 @@ export function fxAllowed(feature: string): boolean {
 }
 
 // ── Default del sitio ────────────────────────────────────────────────────
-// PALIATIVO FREEZE (2026-07-20): los efectos JS pesados arrancan APAGADOS
-// para todo el mundo. "css" mantiene vivas las transiciones CSS (hovers,
-// menús) pero apaga lenis/trail/figuras/reveals/grano. El layout renderiza
-// este valor como data-fx en <html> DESDE EL SERVIDOR (los efectos ni se
-// montan; sin flash ni dependencia de JS).
-//
-// 🔁 PARA REACTIVAR LAS ANIMACIONES: cambiar FX_DEFAULT a null (= sin
-// atributo, todo prendido, vuelve a operar el FxWatchdog), correr
-// `pnpm test` + `pnpm exec tsc --noEmit` + `pnpm build`, commit y push a
-// main → Netlify redeploya. Antes de hacerlo, resolver el freeze de fondo
-// (ver docs/superpowers/specs/2026-07-20-fx-default-off-design.md).
-// Para VERLAS sin deploy: agregar ?fx=on a la URL.
-export const FX_DEFAULT: string | null = "css";
+// null = <html> sin data-fx: TODOS los efectos prendidos y el FxWatchdog
+// operativo (auto-degrada en máquinas que no llegan). Un string (p.ej.
+// "css") se renderiza como data-fx DESDE EL SERVIDOR y deja solo esos
+// efectos — modo paliativo usado el 2026-07-20 durante el diagnóstico del
+// freeze, que terminó exonerando al sitio (el gatillo era el perfil/
+// extensiones de Chrome del usuario; historial completo en
+// docs/superpowers/specs/2026-07-20-fx-default-off-design.md y AGENTS.md).
+// Overrides por URL sin deploy: ?sinfx=1 (todo off) · ?fx=on (todo on) ·
+// ?fx=a,b (solo esos).
+export const FX_DEFAULT: string | null = null;
 
 /** Atributo data-fx inicial para el <html> del layout (server-rendered). */
 export function fxDefaultAttr(v: string | null = FX_DEFAULT): { "data-fx"?: string } {

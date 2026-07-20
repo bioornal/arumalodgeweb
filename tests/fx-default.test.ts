@@ -16,13 +16,13 @@ afterEach(() => {
 });
 
 describe("fxDefaultAttr", () => {
-  it("el default vigente es 'css' (paliativo freeze) y sale como data-fx", () => {
-    expect(FX_DEFAULT).toBe("css");
-    expect(fxDefaultAttr()).toEqual({ "data-fx": "css" });
+  it("el default vigente es null (todo prendido): sin atributo data-fx", () => {
+    expect(FX_DEFAULT).toBeNull();
+    expect(fxDefaultAttr()).toEqual({});
   });
 
-  it("con null (modo histórico) no emite atributo", () => {
-    expect(fxDefaultAttr(null)).toEqual({});
+  it("con un valor (modo paliativo, p.ej. 'css') emite el atributo", () => {
+    expect(fxDefaultAttr("css")).toEqual({ "data-fx": "css" });
   });
 });
 

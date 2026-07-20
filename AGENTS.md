@@ -14,6 +14,17 @@
 - `.env.local` tiene `NEXT_PUBLIC_BOOKING_MODE=whatsapp` (reserva online pausada, CTAs derivan a WhatsApp).
 
 ## Cambios recientes
+- **2026-07-20 (más tarde):**
+  - **Efectos REACTIVADOS** (`FX_DEFAULT = null`): el diagnóstico del freeze terminó
+    **exonerando al sitio** — la escalera de canarios estáticos (`/canary.html`,
+    `/canary-fotos.html`, `/canary-mapa.html`, `/canary-suma.html`, quedan deployados
+    como kit de diagnóstico) probó que fotos/mapa/fuentes/HTML no congelan; la home
+    real congelaba SOLO en el Chrome del usuario con su perfil (en Edge e incógnito
+    carga perfecta) → **el gatillo era una extensión/estado del perfil de Chrome**
+    (sospechosa nº1: React DevTools; quedó latente tras el ciclo deshabilitar/rehabilitar).
+    Métricas del home medidas ese día: JS 235KB gz / 799KB parseado, fuentes ~99KB,
+    fotos ~5MB, DOM 547 nodos — liviano. Si el freeze vuelve: incógnito → bisección
+    de extensiones.
 - **2026-07-20:**
   - **Efectos APAGADOS por defecto** (paliativo freeze): `FX_DEFAULT="css"` en
     `lib/fx.ts` → el `<html>` sale del servidor con `data-fx="css"` (quedan las
@@ -53,4 +64,4 @@
 ## Notas
 - El repo tiene muchos archivos modificados no relacionados (cambios de UI previos sin commitear). Al deployar, solo se commiteó lo del cambio de número.
 - Modo WhatsApp activo: los CTAs de reserva derivan a WhatsApp con mensaje prellenado; `/reservas` redirige a `/tarifas`; los APIs de pago responden 503.
-- Efectos visuales apagados por defecto desde 2026-07-20 (`FX_DEFAULT` en `lib/fx.ts`); `?fx=on` los muestra. Reactivación global: poner `null` y redeployar.
+- Efectos visuales: default `null` (todo prendido) desde 2026-07-20 tarde; el kill-switch (`?sinfx=1` / `?fx=lista` / `FX_DEFAULT` en `lib/fx.ts`) queda como red de seguridad. Los 4 `/canary*.html` en `public/` son el kit de diagnóstico de freeze (ver entrada 2026-07-20).
