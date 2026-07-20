@@ -14,6 +14,15 @@
 - `.env.local` tiene `NEXT_PUBLIC_BOOKING_MODE=whatsapp` (reserva online pausada, CTAs derivan a WhatsApp).
 
 ## Cambios recientes
+- **2026-07-20:**
+  - **Efectos APAGADOS por defecto** (paliativo freeze): `FX_DEFAULT="css"` en
+    `lib/fx.ts` → el `<html>` sale del servidor con `data-fx="css"` (quedan las
+    transiciones CSS; lenis/trail/figuras/reveals/grano apagados). Para VER las
+    animaciones: `?fx=on` en la URL. 🔁 Para REACTIVARLAS para el público:
+    `FX_DEFAULT = null` en `lib/fx.ts` + test/tsc/build + push (instrucciones
+    completas en `docs/superpowers/specs/2026-07-20-fx-default-off-design.md`).
+    Motivo: freeze duro al cargar en máquinas sin GPU que ni el watchdog con
+    deadman alcanzaba a salvar — bloqueaba las pruebas de Mercado Pago.
 - **2026-07-19:**
   - **Galería de Cabaña Tatú** (`/departamentos/tatu`): pasa del layout fallback a la cuadrícula editorial asimétrica (`TATU_PHOTOS` en `UnitDetail.tsx`, mismo mecanismo que Yvyrá/Mberú) con las 11 fotos reales de `Casa/` del bucket (1–5, 7, 8, 13, 15, 18, 22). Dormitorios y baño van arriba en formato grande (cucheta `Casa/8` tall, baño `Casa/13` tall, dormitorio principal `Casa/15` wide) — antes quedaban chicos y mal rotulados. La disposición cierra pareja: 4×5 desktop, 2×10 mobile.
   - **OJO — el mapeo foto↔contenido de `Casa/` estaba mal** en `ImageSlot.tsx` (`REAL_PHOTOS`): `Casa/5` es el estar con sillones (no el dormitorio), `Casa/15` es el dormitorio principal (no la cocina), `Casa/7` es la cocina (no la cucheta), `Casa/8` es la cucheta (no amenities). Corregidos los seeds `cabana-tatu-*` (usan el layout fallback y cards). Verificado descargando y mirando las 11 fotos.
@@ -44,3 +53,4 @@
 ## Notas
 - El repo tiene muchos archivos modificados no relacionados (cambios de UI previos sin commitear). Al deployar, solo se commiteó lo del cambio de número.
 - Modo WhatsApp activo: los CTAs de reserva derivan a WhatsApp con mensaje prellenado; `/reservas` redirige a `/tarifas`; los APIs de pago responden 503.
+- Efectos visuales apagados por defecto desde 2026-07-20 (`FX_DEFAULT` en `lib/fx.ts`); `?fx=on` los muestra. Reactivación global: poner `null` y redeployar.
