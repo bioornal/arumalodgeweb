@@ -4,6 +4,9 @@
 export const WHATSAPP_NUMBER = "5493757652002";
 export const CONTACT_EMAIL = "arumalodge.iguazu@gmail.com";
 export const CONTACT_PHONE_HREF = "tel:+5493757652002";
+// Instagram: @arumalodgeiguazu (Facebook aún no existe — ambos íconos
+// sociales apuntan acá por ahora).
+export const INSTAGRAM_URL = "https://www.instagram.com/arumalodgeiguazu";
 
 /** Link a WhatsApp, opcionalmente con mensaje prellenado. */
 export function waLink(message?: string): string {

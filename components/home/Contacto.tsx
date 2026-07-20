@@ -2,7 +2,12 @@ import { useTranslations } from "next-intl";
 import { Kicker } from "@/components/ui/Kicker";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "./ContactForm";
-import { waLink, CONTACT_EMAIL, CONTACT_PHONE_HREF } from "@/lib/contact";
+import {
+  waLink,
+  CONTACT_EMAIL,
+  CONTACT_PHONE_HREF,
+  INSTAGRAM_URL,
+} from "@/lib/contact";
 
 const WA_HREF = waLink();
 const MAPS_EMBED =
@@ -149,7 +154,9 @@ export function Contacto() {
                 {/* Social icons */}
                 <div className="flex gap-[10px]" style={{ marginTop: 18 }}>
                   <a
-                    href="#contacto"
+                    href={INSTAGRAM_URL}
+                    target="_blank"
+                    rel="noopener"
                     aria-label="Instagram"
                     className="flex items-center justify-center rounded-full transition-[border-color,color] duration-300 hover:border-bronce hover:text-carbon"
                     style={{
@@ -173,7 +180,9 @@ export function Contacto() {
                     </svg>
                   </a>
                   <a
-                    href="#contacto"
+                    href={INSTAGRAM_URL}
+                    target="_blank"
+                    rel="noopener"
                     aria-label="Facebook"
                     className="flex items-center justify-center rounded-full transition-[border-color,color] duration-300 hover:border-bronce hover:text-carbon"
                     style={{
