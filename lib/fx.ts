@@ -17,3 +17,36 @@ export function fxAllowed(feature: string): boolean {
   if (fx === undefined) return true;
   return fx.split(" ").includes(feature);
 }
+
+// ── Default del sitio ────────────────────────────────────────────────────
+// PALIATIVO FREEZE (2026-07-20): los efectos JS pesados arrancan APAGADOS
+// para todo el mundo. "css" mantiene vivas las transiciones CSS (hovers,
+// menús) pero apaga lenis/trail/figuras/reveals/grano. El layout renderiza
+// este valor como data-fx en <html> DESDE EL SERVIDOR (los efectos ni se
+// montan; sin flash ni dependencia de JS).
+//
+// 🔁 PARA REACTIVAR LAS ANIMACIONES: cambiar FX_DEFAULT a null (= sin
+// atributo, todo prendido, vuelve a operar el FxWatchdog), correr
+// `pnpm test` + `pnpm exec tsc --noEmit` + `pnpm build`, commit y push a
+// main → Netlify redeploya. Antes de hacerlo, resolver el freeze de fondo
+// (ver docs/superpowers/specs/2026-07-20-fx-default-off-design.md).
+// Para VERLAS sin deploy: agregar ?fx=on a la URL.
+export const FX_DEFAULT: string | null = "css";
+
+/** Atributo data-fx inicial para el <html> del layout (server-rendered). */
+export function fxDefaultAttr(v: string | null = FX_DEFAULT): { "data-fx"?: string } {
+  return v === null ? {} : { "data-fx": v };
+}
+
+// Script de arranque (inline en el layout, corre ANTES de hidratar).
+// Traduce la URL a data-fx pisando el default del server:
+//   ?sinfx=1 → todo apagado · ?fx=on → todo prendido (borra el atributo) ·
+//   ?fx=a,b → solo esos. Sin params: si el FxWatchdog grabó aruma-fx-off
+//   (TTL 24h) apaga todo; si no, queda lo que puso el server.
+export const FX_BOOT_SCRIPT =
+  'var d=document.documentElement,q=location.search,m=q.match(/[?&]fx=([^&]*)/);' +
+  'if(q.indexOf("sinfx")>-1)d.dataset.fx="";' +
+  'else if(m){var v=decodeURIComponent(m[1]);' +
+  'if(v==="on")delete d.dataset.fx;else d.dataset.fx=v.replace(/,/g," ");}' +
+  'else{try{var t=+localStorage.getItem("aruma-fx-off");' +
+  'if(t&&Date.now()-t<864e5)d.dataset.fx="";}catch(e){}}';
