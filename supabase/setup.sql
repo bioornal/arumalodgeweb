@@ -83,3 +83,10 @@ drop trigger if exists rate_settings_set_updated_at on public.rate_settings;
 create trigger rate_settings_set_updated_at
   before update on public.rate_settings
   for each row execute function public.set_updated_at();
+
+-- Precios por método de pago (2026-07-20): % de costo por canal, editables en
+-- /admin/tarifas. El precio público = neto ÷ (1 − pct/100) (ver method-pricing.ts).
+-- Para bases que ya tienen rate_settings creada, este ALTER agrega las columnas.
+alter table public.rate_settings
+  add column if not exists card_fee_pct     numeric(5,2) not null default 7.7,
+  add column if not exists transfer_fee_pct numeric(5,2) not null default 5;

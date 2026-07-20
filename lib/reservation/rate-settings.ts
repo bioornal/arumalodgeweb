@@ -11,6 +11,10 @@ export type RateSettings = {
   cleaningFee: number;
   baseGuests: number;
   extraGuestFee: number;
+  /** Comisión % del cobro con tarjeta (MP). Los precios públicos la incluyen (ver method-pricing.ts). */
+  cardFeePct: number;
+  /** Costo % del cobro por transferencia (retención IIBB). */
+  transferFeePct: number;
 };
 
 // Fallback si la DB no responde o aún no se corrió el SQL: los mismos valores
@@ -24,6 +28,8 @@ export const DEFAULT_RATE_SETTINGS: RateSettings = {
   cleaningFee: CLEANING_FEE,
   baseGuests: BASE_GUESTS,
   extraGuestFee: 0,
+  cardFeePct: 7.7,
+  transferFeePct: 5,
 };
 
 // ---- Fila de Supabase ↔ RateSettings -------------------------------------
@@ -35,7 +41,16 @@ export type RateSettingsRow = {
   cleaning_fee: number;
   base_guests: number;
   extra_guest_fee: number;
+  // Pueden faltar si aún no se corrió el ALTER de setup.sql en Supabase.
+  card_fee_pct?: number | string | null;
+  transfer_fee_pct?: number | string | null;
 };
+
+/** numeric de Postgres puede llegar como string; ausente/int inválido → default. */
+function parsePct(v: number | string | null | undefined, fallback: number): number {
+  const n = typeof v === "string" ? Number(v) : v;
+  return typeof n === "number" && Number.isFinite(n) && n >= 0 && n <= 30 ? n : fallback;
+}
 
 export function rowToSettings(row: RateSettingsRow): RateSettings {
   return {
@@ -47,6 +62,8 @@ export function rowToSettings(row: RateSettingsRow): RateSettings {
     cleaningFee: row.cleaning_fee,
     baseGuests: row.base_guests,
     extraGuestFee: row.extra_guest_fee,
+    cardFeePct: parsePct(row.card_fee_pct, DEFAULT_RATE_SETTINGS.cardFeePct),
+    transferFeePct: parsePct(row.transfer_fee_pct, DEFAULT_RATE_SETTINGS.transferFeePct),
   };
 }
 
@@ -58,6 +75,8 @@ export function settingsToRow(s: RateSettings): RateSettingsRow {
     cleaning_fee: s.cleaningFee,
     base_guests: s.baseGuests,
     extra_guest_fee: s.extraGuestFee,
+    card_fee_pct: s.cardFeePct,
+    transfer_fee_pct: s.transferFeePct,
   };
 }
 
@@ -72,6 +91,15 @@ function parseMoney(raw: string): number | null {
 }
 
 export type RateSettingsInput = Record<keyof RateSettingsRow, string>;
+
+/** % con hasta 2 decimales entre 0 y 30 (acepta coma o punto). */
+function parsePctInput(raw: string): number | null {
+  const trimmed = raw.trim();
+  if (!trimmed) return null; // Number("") === 0: el vacío NO es 0%
+  const n = Number(trimmed.replace(",", "."));
+  if (!Number.isFinite(n) || n < 0 || n > 30) return null;
+  return Math.round(n * 100) / 100;
+}
 
 /** Valida los campos del form de /admin/tarifas. Devuelve error legible o el valor listo para guardar. */
 export function parseRateSettingsInput(
@@ -91,5 +119,9 @@ export function parseRateSettingsInput(
   if (!Number.isInteger(baseGuests) || baseGuests < 1 || baseGuests > 20) {
     return { ok: false, error: "Los huéspedes incluidos deben ser un entero entre 1 y 20." };
   }
-  return { ok: true, value: { nightly, cleaningFee, baseGuests, extraGuestFee } };
+  const cardFeePct = parsePctInput(raw.card_fee_pct);
+  if (cardFeePct === null) return { ok: false, error: "La comisión de tarjeta debe ser un % entre 0 y 30." };
+  const transferFeePct = parsePctInput(raw.transfer_fee_pct);
+  if (transferFeePct === null) return { ok: false, error: "El costo de transferencia debe ser un % entre 0 y 30." };
+  return { ok: true, value: { nightly, cleaningFee, baseGuests, extraGuestFee, cardFeePct, transferFeePct } };
 }
