@@ -9,6 +9,7 @@ import { UNITS } from "@/lib/units";
 import { parseRateQuery } from "@/lib/reservation/search";
 import { getRatesForRange } from "@/lib/reservation/rates.server";
 import { getRateSettings } from "@/lib/reservation/rate-settings.server";
+import { methodRates } from "@/lib/reservation/method-pricing";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -41,6 +42,8 @@ export default async function TarifasPage({
   const query = parseRateQuery({ checkIn: str(sp.checkIn), checkOut: str(sp.checkOut), guests: str(sp.guests) });
   // Memoizado (TTL 30s): la segunda llamada dentro de getRatesForRange no pega en la DB.
   const settings = await getRateSettings();
+  // Precio de lista público = método tarjeta (comisión incluida, ver method-pricing.ts)
+  const listPrices = methodRates(settings, "card").nightly;
   const rates = query ? await getRatesForRange(query.checkIn, query.checkOut, query.guests) : null;
 
   return (
@@ -61,7 +64,7 @@ export default async function TarifasPage({
           <div style={{ display: "flex", flexDirection: "column", gap: 20, marginTop: 30 }}>
             {UNITS.map((unit) => {
               const rate = rates ? rates.find((r) => r.unit.slug === unit.slug)! : null;
-              return <UnitRateCard key={unit.slug} unit={unit} rate={rate} query={query} prices={settings.nightly} />;
+              return <UnitRateCard key={unit.slug} unit={unit} rate={rate} query={query} prices={listPrices} />;
             })}
           </div>
 

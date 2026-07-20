@@ -15,37 +15,44 @@ vi.mock("@/lib/reservation/rate-settings.server", async () => {
 
 import { getAvailabilityServer } from "@/lib/reservation/availability.server";
 import { getRatesForRange } from "@/lib/reservation/rates.server";
-import { UNITS, CLEANING_FEE, pricePerNight, TATU_PRICE } from "@/lib/units";
+import { UNITS, pricePerNight } from "@/lib/units";
+import { DEFAULT_RATE_SETTINGS } from "@/lib/reservation/rate-settings";
+import { methodTotal, transferSavings } from "@/lib/reservation/method-pricing";
 
 const mocked = vi.mocked(getAvailabilityServer);
 
 beforeEach(() => mocked.mockReset());
 
 describe("getRatesForRange", () => {
-  it("disponible + total correcto cuando no hay noches ocupadas", async () => {
+  it("disponible + montos públicos = método tarjeta (comisión incluida) + ahorro transferencia", async () => {
     mocked.mockResolvedValue({ disabledDates: [], source: "google-calendar" });
     const rates = await getRatesForRange("2026-07-02", "2026-07-05", 4);
     expect(rates).toHaveLength(UNITS.length);
     const yvyra = rates.find((r) => r.unit.slug === "yvyra")!;
     expect(yvyra.nights).toBe(3);
     expect(yvyra.available).toBe(true);
-    expect(yvyra.total).toBe(pricePerNight("yvyra", 4) * 3 + CLEANING_FEE);
+    expect(yvyra.total).toBe(methodTotal(DEFAULT_RATE_SETTINGS, "card", "yvyra", 3));
+    expect(yvyra.transferTotal).toBe(methodTotal(DEFAULT_RATE_SETTINGS, "transfer", "yvyra", 3));
+    expect(yvyra.savings).toBe(transferSavings(DEFAULT_RATE_SETTINGS, "yvyra", 3));
+    expect(yvyra.savings).toBeGreaterThan(0);
+    // El precio de lista es MAYOR al neto configurado (la comisión va adentro)
+    expect(yvyra.nightly).toBeGreaterThan(DEFAULT_RATE_SETTINGS.nightly.yvyra);
   });
 
   it("tarifa plana: mismo precio sin importar el número de huéspedes", async () => {
     mocked.mockResolvedValue({ disabledDates: [], source: "google-calendar" });
     const rates = await getRatesForRange("2026-07-02", "2026-07-05", 6);
     const yvyra = rates.find((r) => r.unit.slug === "yvyra")!;
-    expect(yvyra.total).toBe(pricePerNight("yvyra", 6) * 3 + CLEANING_FEE);
+    expect(yvyra.total).toBe(methodTotal(DEFAULT_RATE_SETTINGS, "card", "yvyra", 3));
     expect(pricePerNight("yvyra", 6)).toBe(200000);
     expect(pricePerNight("mberu", 6)).toBe(200000);
   });
 
-  it("tatu tiene tarifa plana sin importar el número de huéspedes", async () => {
+  it("tatu: total de lista consistente con method-pricing", async () => {
     mocked.mockResolvedValue({ disabledDates: [], source: "google-calendar" });
     const rates = await getRatesForRange("2026-07-02", "2026-07-05", 4);
     const tatu = rates.find((r) => r.unit.slug === "tatu")!;
-    expect(tatu.total).toBe(TATU_PRICE * 3 + CLEANING_FEE);
+    expect(tatu.total).toBe(methodTotal(DEFAULT_RATE_SETTINGS, "card", "tatu", 3));
     expect(pricePerNight("tatu", 4)).toBe(130000);
   });
 

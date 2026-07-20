@@ -53,6 +53,11 @@ export function UnitRateCard({ unit, rate, query, prices }: UnitRateCardProps) {
                 <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 30, color: "#1D1D1D", marginTop: 2 }}>
                   {money(rate.total)} <span style={{ fontSize: 14, color: "#6b665d" }}>{t("total")}</span>
                 </div>
+                {!whatsappMode && rate.savings > 0 && (
+                  <div style={{ fontSize: 12.5, color: "#2f5d33", marginTop: 4 }}>
+                    {t("transferNote", { total: money(rate.transferTotal), savings: money(rate.savings) })}
+                  </div>
+                )}
               </>
             ) : (
               <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 26, color: "#1D1D1D" }}>
