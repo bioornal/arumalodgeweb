@@ -25,6 +25,7 @@ interface StepPagoProps {
 
 export function StepPago({ state, settings, method, onMethodChange, onApproved, onPending }: StepPagoProps) {
   const t = useTranslations("reservas");
+  const tLegal = useTranslations("legal");
   const locale = useLocale();
   const [error, setError] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
@@ -136,9 +137,9 @@ export function StepPago({ state, settings, method, onMethodChange, onApproved, 
         </>
       )}
       <p style={{ fontSize: 12, color: "#7e9184", marginTop: 14, lineHeight: 1.6 }}>
-        Al confirmar aceptás nuestra{" "}
-        <a href="/es/politicas/cancelacion" target="_blank" rel="noopener" style={{ color: "#9DBF9E" }}>
-          política de cancelación
+        {tLegal("cancelDisclaimerLead")}{" "}
+        <a href={`/${locale}/politicas/cancelacion`} target="_blank" rel="noopener" style={{ color: "#9DBF9E" }}>
+          {tLegal("cancelDisclaimerLink")}
         </a>
         .
       </p>
