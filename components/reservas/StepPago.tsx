@@ -135,6 +135,13 @@ export function StepPago({ state, settings, method, onMethodChange, onApproved, 
           {error && <ErrorBox msg={error} />}
         </>
       )}
+      <p style={{ fontSize: 12, color: "#7e9184", marginTop: 14, lineHeight: 1.6 }}>
+        Al confirmar aceptás nuestra{" "}
+        <a href="/es/politicas/cancelacion" target="_blank" rel="noopener" style={{ color: "#9DBF9E" }}>
+          política de cancelación
+        </a>
+        .
+      </p>
     </div>
   );
 }

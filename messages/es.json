@@ -211,6 +211,8 @@
     "langTitle": "Idioma",
     "copyright": "© 2026 Aruma Lodge. Todos los derechos reservados.",
     "myReservation": "Mi reserva",
+    "cancelPolicy": "Política de cancelación",
+    "privacy": "Privacidad",
     "credit": "Sitio creado por Selva Digital"
   },
   "departamento": {
@@ -380,5 +382,38 @@
     "msgCancelled": "Esta reserva fue cancelada o liberada.",
     "whatsappCta": "Gestionar por WhatsApp",
     "newQuery": "Consultar otra"
+  },
+  "legal": {
+    "updatedAt": "Última actualización: 23 de julio de 2026",
+    "cancelTitle": "Política de cancelación y reembolso",
+    "cancelIntro": "Sabemos que los planes cambian. Estas son las condiciones con las que trabajamos, iguales para todas las unidades y todos los métodos de pago.",
+    "cancelH1": "Cancelación con 7 días o más de anticipación",
+    "cancelP1": "Devolvemos el 100% de lo abonado. El reembolso se hace por la misma vía por la que pagaste y puede demorar hasta 10 días hábiles en acreditarse, según tu banco o tu tarjeta.",
+    "cancelH2": "Cancelación dentro de los 7 días previos al check-in",
+    "cancelP2": "No corresponde reembolso. Si podés, avisanos igual: si logramos volver a ocupar esas fechas, te devolvemos lo que se haya podido recuperar.",
+    "cancelH3": "No presentarse (no-show)",
+    "cancelP3": "Si no llegás y no nos avisaste, se toma como cancelación dentro de los 7 días: no corresponde reembolso.",
+    "cancelH4": "Cambios de fecha",
+    "cancelP4": "Con 7 días o más de anticipación podés mover tu reserva a otras fechas del mismo año, sujeto a disponibilidad y a la tarifa vigente de las fechas nuevas. Escribinos por WhatsApp y lo resolvemos.",
+    "cancelH5": "Si cancelamos nosotros",
+    "cancelP5": "Si por una razón de fuerza mayor no pudiéramos recibirte, te devolvemos el 100% de lo abonado sin importar cuándo ocurra, y te ayudamos a conseguir alojamiento equivalente en la zona.",
+    "cancelH6": "Cómo cancelar",
+    "cancelP6": "Escribinos por WhatsApp al +54 9 3757 652002 con tu código de reserva. Vale la fecha y hora del mensaje.",
+    "privacyTitle": "Aviso de privacidad",
+    "privacyIntro": "Este aviso explica qué datos tuyos guardamos, para qué, y cómo pedirnos que los borremos. Aplica a arumalodge y a las reservas hechas desde este sitio.",
+    "privacyH1": "Qué datos recolectamos",
+    "privacyP1": "Al reservar te pedimos nombre y apellido, email y teléfono. Si pagás por transferencia, además guardamos el comprobante que subís. Si pagás con tarjeta, los datos de la tarjeta los procesa Mercado Pago directamente: nosotros nunca los vemos ni los almacenamos.",
+    "privacyH2": "Para qué los usamos",
+    "privacyP2": "Únicamente para gestionar tu reserva: confirmarla, coordinar el check-in, emitir el comprobante y contactarte si surge algo con tu estadía. No los usamos para publicidad ni te mandamos newsletters.",
+    "privacyH3": "Con quién los compartimos",
+    "privacyP3": "Con nadie, salvo los servicios que necesitamos para que la reserva funcione: Mercado Pago (procesamiento del pago), Supabase (base de datos y almacenamiento de comprobantes) y Google Calendar (agenda de ocupación). No vendemos ni cedemos datos a terceros.",
+    "privacyH4": "Cuánto tiempo los guardamos",
+    "privacyP4": "Los datos de la reserva se conservan mientras sean necesarios para cumplir con nuestras obligaciones contables e impositivas. Los comprobantes de transferencia se guardan en un espacio privado, no accesible públicamente.",
+    "privacyH5": "Tus derechos",
+    "privacyP5": "Podés pedirnos en cualquier momento acceder a tus datos, corregirlos o que los borremos, escribiendo a arumalodge.iguazu@gmail.com. Te respondemos dentro de los 10 días corridos.",
+    "privacyH6": "Cookies y métricas",
+    "privacyP6": "Usamos Google Analytics para entender cómo se navega el sitio (páginas vistas, de dónde llega la gente). Son datos agregados, no te identifican personalmente. Podés bloquearlos desde la configuración de tu navegador.",
+    "privacyH7": "Contacto",
+    "privacyP7": "Por cualquier consulta sobre tus datos: arumalodge.iguazu@gmail.com o WhatsApp +54 9 3757 652002."
   }
 }

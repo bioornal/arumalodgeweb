@@ -81,6 +81,18 @@ export function SiteFooter() {
               >
                 {tf("myReservation")}
               </IntlLink>
+              <IntlLink
+                href="/politicas/cancelacion"
+                className="text-[#cfc8bc] no-underline transition-colors duration-[250ms] hover:text-marfil"
+              >
+                {tf("cancelPolicy")}
+              </IntlLink>
+              <IntlLink
+                href="/privacidad"
+                className="text-[#cfc8bc] no-underline transition-colors duration-[250ms] hover:text-marfil"
+              >
+                {tf("privacy")}
+              </IntlLink>
               <a
                 href="#contacto"
                 className="text-[#cfc8bc] no-underline transition-colors duration-[250ms] hover:text-marfil"

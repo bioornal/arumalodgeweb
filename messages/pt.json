@@ -211,6 +211,8 @@
     "langTitle": "Idioma",
     "copyright": "© 2026 Aruma Lodge. Todos os direitos reservados.",
     "myReservation": "Minha reserva",
+    "cancelPolicy": "Política de cancelamento",
+    "privacy": "Privacidade",
     "credit": "Site criado por Selva Digital"
   },
   "departamento": {
@@ -380,5 +382,38 @@
     "msgCancelled": "Esta reserva foi cancelada ou liberada.",
     "whatsappCta": "Gerenciar pelo WhatsApp",
     "newQuery": "Consultar outra"
+  },
+  "legal": {
+    "updatedAt": "Última atualização: 23 de julho de 2026",
+    "cancelTitle": "Política de cancelamento e reembolso",
+    "cancelIntro": "Sabemos que os planos mudam. Estas são as condições com que trabalhamos, iguais para todas as unidades e todos os meios de pagamento.",
+    "cancelH1": "Cancelamento com 7 dias ou mais de antecedência",
+    "cancelP1": "Devolvemos 100% do valor pago. O reembolso é feito pelo mesmo meio que você usou e pode levar até 10 dias úteis para aparecer, conforme seu banco ou cartão.",
+    "cancelH2": "Cancelamento dentro dos 7 dias anteriores ao check-in",
+    "cancelP2": "Não há reembolso. Avise-nos mesmo assim: se conseguirmos ocupar essas datas de novo, devolvemos o que for possível recuperar.",
+    "cancelH3": "Não comparecimento (no-show)",
+    "cancelP3": "Se você não chegar e não nos avisar, conta como cancelamento dentro dos 7 dias: não há reembolso.",
+    "cancelH4": "Mudança de datas",
+    "cancelP4": "Com 7 dias ou mais de antecedência você pode mudar sua reserva para outras datas do mesmo ano, sujeito à disponibilidade e à tarifa vigente das novas datas. Escreva no WhatsApp e resolvemos.",
+    "cancelH5": "Se nós cancelarmos",
+    "cancelP5": "Se por motivo de força maior não pudermos receber você, devolvemos 100% do valor pago, não importa quando aconteça, e ajudamos a encontrar hospedagem equivalente na região.",
+    "cancelH6": "Como cancelar",
+    "cancelP6": "Escreva no WhatsApp +54 9 3757 652002 com seu código de reserva. Vale a data e hora da mensagem.",
+    "privacyTitle": "Aviso de privacidade",
+    "privacyIntro": "Este aviso explica quais dados seus guardamos, para quê, e como pedir que sejam apagados. Aplica-se ao Aruma Lodge e às reservas feitas por este site.",
+    "privacyH1": "Que dados coletamos",
+    "privacyP1": "Ao reservar pedimos nome e sobrenome, e-mail e telefone. Se você pagar por transferência, guardamos também o comprovante enviado. Se pagar com cartão, os dados do cartão são processados diretamente pelo Mercado Pago: nós nunca os vemos nem armazenamos.",
+    "privacyH2": "Para que os usamos",
+    "privacyP2": "Apenas para gerenciar sua reserva: confirmá-la, combinar o check-in, emitir o comprovante e contatar você se surgir algo durante a estadia. Não usamos para publicidade nem enviamos newsletters.",
+    "privacyH3": "Com quem compartilhamos",
+    "privacyP3": "Com ninguém, exceto os serviços necessários para a reserva funcionar: Mercado Pago (processamento do pagamento), Supabase (banco de dados e armazenamento de comprovantes) e Google Calendar (agenda de ocupação). Não vendemos nem cedemos dados a terceiros.",
+    "privacyH4": "Por quanto tempo guardamos",
+    "privacyP4": "Os dados da reserva são mantidos enquanto necessários para cumprir nossas obrigações contábeis e fiscais. Os comprovantes de transferência ficam em um espaço privado, não acessível publicamente.",
+    "privacyH5": "Seus direitos",
+    "privacyP5": "Você pode pedir a qualquer momento para acessar, corrigir ou apagar seus dados escrevendo para arumalodge.iguazu@gmail.com. Respondemos em até 10 dias corridos.",
+    "privacyH6": "Cookies e métricas",
+    "privacyP6": "Usamos Google Analytics para entender como o site é navegado (páginas vistas, de onde vêm os visitantes). São dados agregados e não identificam você pessoalmente. Você pode bloqueá-los nas configurações do navegador.",
+    "privacyH7": "Contato",
+    "privacyP7": "Para qualquer dúvida sobre seus dados: arumalodge.iguazu@gmail.com ou WhatsApp +54 9 3757 652002."
   }
 }

@@ -211,6 +211,8 @@
     "langTitle": "Language",
     "copyright": "© 2026 Aruma Lodge. All rights reserved.",
     "myReservation": "My reservation",
+    "cancelPolicy": "Cancellation policy",
+    "privacy": "Privacy",
     "credit": "Site created by Selva Digital"
   },
   "departamento": {
@@ -380,5 +382,38 @@
     "msgCancelled": "This reservation was cancelled or released.",
     "whatsappCta": "Manage via WhatsApp",
     "newQuery": "Check another"
+  },
+  "legal": {
+    "updatedAt": "Last updated: July 23, 2026",
+    "cancelTitle": "Cancellation and refund policy",
+    "cancelIntro": "We know plans change. These are the terms we work with, the same for every unit and every payment method.",
+    "cancelH1": "Cancelling 7 or more days in advance",
+    "cancelP1": "We refund 100% of what you paid. The refund goes back through the same method you used and may take up to 10 business days to appear, depending on your bank or card issuer.",
+    "cancelH2": "Cancelling within 7 days of check-in",
+    "cancelP2": "No refund applies. Let us know anyway: if we manage to rebook those dates, we'll return whatever we're able to recover.",
+    "cancelH3": "No-show",
+    "cancelP3": "If you don't arrive and didn't tell us, it counts as a cancellation within 7 days: no refund applies.",
+    "cancelH4": "Date changes",
+    "cancelP4": "With 7 or more days' notice you can move your booking to other dates within the same year, subject to availability and the rate for the new dates. Message us on WhatsApp and we'll sort it out.",
+    "cancelH5": "If we cancel",
+    "cancelP5": "If circumstances beyond our control mean we can't host you, we refund 100% regardless of when it happens, and we'll help you find equivalent lodging nearby.",
+    "cancelH6": "How to cancel",
+    "cancelP6": "Message us on WhatsApp at +54 9 3757 652002 with your booking code. The date and time of your message is what counts.",
+    "privacyTitle": "Privacy notice",
+    "privacyIntro": "This notice explains what data we keep about you, what for, and how to ask us to delete it. It applies to Aruma Lodge and to bookings made through this site.",
+    "privacyH1": "What we collect",
+    "privacyP1": "When you book we ask for your first and last name, email and phone number. If you pay by bank transfer, we also store the receipt you upload. If you pay by card, Mercado Pago handles the card details directly: we never see or store them.",
+    "privacyH2": "What we use it for",
+    "privacyP2": "Only to manage your booking: confirming it, arranging check-in, issuing your receipt, and contacting you if something comes up during your stay. We don't use it for advertising and we don't send newsletters.",
+    "privacyH3": "Who we share it with",
+    "privacyP3": "Nobody, apart from the services we need for the booking to work: Mercado Pago (payment processing), Supabase (database and receipt storage) and Google Calendar (occupancy schedule). We don't sell or hand data to third parties.",
+    "privacyH4": "How long we keep it",
+    "privacyP4": "Booking data is kept as long as we need it to meet our accounting and tax obligations. Transfer receipts are stored in a private space that isn't publicly accessible.",
+    "privacyH5": "Your rights",
+    "privacyP5": "You can ask us at any time to access, correct or delete your data by writing to arumalodge.iguazu@gmail.com. We reply within 10 calendar days.",
+    "privacyH6": "Cookies and analytics",
+    "privacyP6": "We use Google Analytics to understand how the site is browsed (page views, where visitors come from). This is aggregate data and doesn't identify you personally. You can block it from your browser settings.",
+    "privacyH7": "Contact",
+    "privacyP7": "For any question about your data: arumalodge.iguazu@gmail.com or WhatsApp +54 9 3757 652002."
   }
 }
