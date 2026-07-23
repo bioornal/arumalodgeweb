@@ -44,6 +44,7 @@ vi.mock("@/lib/site-settings.server", () => ({
   getBookingMode: vi.fn(async () => "online" as const),
 }));
 
+import { resetRateLimits } from "@/lib/rate-limit";
 import { POST } from "@/app/api/reservations/transfer/route";
 
 function form(fields: Record<string, string>, file?: File) {
@@ -61,6 +62,7 @@ const VALID = {
 const goodFile = () => new File([new Uint8Array([1, 2, 3])], "c.jpg", { type: "image/jpeg" });
 
 beforeEach(() => {
+  resetRateLimits();
   vi.clearAllMocks();
   isRangeAvailable.mockResolvedValue(true);
   uploadComprobante.mockResolvedValue("tatu-path/x.jpg");

@@ -16,6 +16,7 @@ import { insertReservation } from "@/lib/reservation/reservations.server";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
 import { getBookingMode } from "@/lib/site-settings.server";
 import { sendConfirmationEmailOnce } from "@/lib/reservation/email.server";
+import { clientIp, rateLimited } from "@/lib/rate-limit";
 import type { UnitId } from "@/lib/reservation/reducer";
 
 const VALID_UNITS: UnitId[] = ["yvyra", "mberu", "tatu"];
@@ -40,6 +41,12 @@ function isMockPay(v: unknown): v is MockPay {
 }
 
 export async function POST(req: Request) {
+  // 10 intentos de cobro por minuto por IP: un huésped legítimo reintenta 2 o 3
+  // veces si le rebota la tarjeta, nunca diez.
+  if (rateLimited("payments", clientIp(req), 10, 60_000)) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
   // Reservas online pausadas (modo WhatsApp): no se cobra.
   // Se lee server-side: el cliente nunca decide si se puede cobrar.
   if (isWhatsAppBookingMode(await getBookingMode())) {

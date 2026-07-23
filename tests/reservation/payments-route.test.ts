@@ -41,6 +41,7 @@ vi.mock("@/lib/site-settings.server", () => ({
   getBookingMode: vi.fn(async () => "online" as const),
 }));
 
+import { resetRateLimits } from "@/lib/rate-limit";
 import { POST } from "@/app/api/payments/route";
 
 const CARD = { token: "tok-1", paymentMethodId: "visa", installments: 1 };
@@ -65,6 +66,7 @@ function post(body: unknown) {
 }
 
 beforeEach(() => {
+  resetRateLimits();
   isRangeAvailable.mockReset();
   createBookingEvent.mockReset();
   createCardPayment.mockReset();

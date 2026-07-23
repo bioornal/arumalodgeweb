@@ -10,6 +10,7 @@ import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 import { isValidEmail } from "@/lib/reservation/validation";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
 import { getBookingMode } from "@/lib/site-settings.server";
+import { clientIp, rateLimited } from "@/lib/rate-limit";
 import type { UnitId } from "@/lib/reservation/reducer";
 
 const VALID_UNITS: UnitId[] = ["yvyra", "mberu", "tatu"];
@@ -31,6 +32,11 @@ function isFileLike(v: unknown): v is File {
 }
 
 export async function POST(req: Request) {
+  // 5 por minuto: cada request sube un archivo al bucket de comprobantes.
+  if (rateLimited("transfer", clientIp(req), 5, 60_000)) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
   // Reservas online pausadas (modo WhatsApp): no se aceptan reservas por transferencia.
   // Se lee server-side: el cliente nunca decide si se puede cobrar.
   if (isWhatsAppBookingMode(await getBookingMode())) {
