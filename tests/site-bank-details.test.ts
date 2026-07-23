@@ -64,4 +64,15 @@ describe("bankDetailsConfigured", () => {
     const { bankDetailsConfigured } = await import("@/lib/site");
     expect(bankDetailsConfigured()).toBe(false);
   });
+
+  it("es true aunque el titular real coincida literalmente con el placeholder", async () => {
+    // Regresión: el dueño puede tener un titular real llamado "Aruma Lodge".
+    // Una implementación por igualdad-con-placeholder desactivaría la
+    // transferencia para siempre en ese caso, aunque los datos estén cargados.
+    process.env.NEXT_PUBLIC_ARUMA_BANK_ALIAS = "ARUMA.REAL";
+    process.env.NEXT_PUBLIC_ARUMA_BANK_CBU = "2850590940090418135201";
+    process.env.NEXT_PUBLIC_ARUMA_BANK_HOLDER = "Aruma Lodge";
+    const { bankDetailsConfigured } = await import("@/lib/site");
+    expect(bankDetailsConfigured()).toBe(true);
+  });
 });

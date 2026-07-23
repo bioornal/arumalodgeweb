@@ -24,9 +24,12 @@ export const SERVICES: ServiceKey[] = ["wifi", "ac", "kitchen", "reception", "pa
 // blanco. envOrDefault trata vacío y espacios como ausente.
 const PLACEHOLDER_CBU = "0000000000000000000000";
 
+function envPresent(raw: string | undefined): boolean {
+  return (raw ?? "").trim() !== "";
+}
+
 function envOrDefault(raw: string | undefined, fallback: string): string {
-  const v = (raw ?? "").trim();
-  return v === "" ? fallback : v;
+  return envPresent(raw) ? (raw as string).trim() : fallback;
 }
 
 export const BANK_DETAILS = {
@@ -36,14 +39,17 @@ export const BANK_DETAILS = {
 };
 
 /**
- * true solo si los tres datos bancarios REALES están cargados.
+ * true solo si las tres env vars de datos bancarios fueron seteadas (no vacías).
+ * OJO: NO comparar contra los placeholders — el titular real puede coincidir
+ * textualmente con "Aruma Lodge", y esa comparación dejaría la transferencia
+ * deshabilitada para siempre aunque los datos estén cargados de verdad.
  * El paso de transferencia lo usa para no mostrarle al huésped un CBU inválido:
  * es preferible avisar que el método no está disponible.
  */
 export function bankDetailsConfigured(): boolean {
   return (
-    BANK_DETAILS.cbu !== PLACEHOLDER_CBU &&
-    BANK_DETAILS.alias !== "ARUMA.LODGE.IGUAZU" &&
-    BANK_DETAILS.holder !== "Aruma Lodge"
+    envPresent(process.env.NEXT_PUBLIC_ARUMA_BANK_ALIAS) &&
+    envPresent(process.env.NEXT_PUBLIC_ARUMA_BANK_CBU) &&
+    envPresent(process.env.NEXT_PUBLIC_ARUMA_BANK_HOLDER)
   );
 }
