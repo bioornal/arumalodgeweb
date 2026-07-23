@@ -7,6 +7,7 @@ import { FxWatchdog } from "@/components/motion/FxWatchdog";
 import { fxDefaultAttr, FX_BOOT_SCRIPT } from "@/lib/fx";
 import { LenisProvider } from "@/components/motion/LenisProvider";
 import { SITE_URL } from "@/lib/seo";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -49,6 +50,12 @@ export default async function LocaleLayout({
           <FxWatchdog />
           <LenisProvider>{children}</LenisProvider>
         </NextIntlClientProvider>
+        {/* GA4. Sin el ID seteado no renderiza nada: en dev y en previews el
+            sitio no ensucia las métricas de producción. @next/third-parties lo
+            carga con la estrategia afterInteractive, fuera del critical path. */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );
