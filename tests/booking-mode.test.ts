@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { isWhatsAppBookingMode } from "@/lib/booking-mode";
+import { isWhatsAppBookingMode, resolveBookingMode } from "@/lib/booking-mode";
 import { waLink, WHATSAPP_NUMBER } from "@/lib/contact";
 
 const ORIGINAL = process.env.NEXT_PUBLIC_BOOKING_MODE;
@@ -9,17 +9,32 @@ afterEach(() => {
   else process.env.NEXT_PUBLIC_BOOKING_MODE = ORIGINAL;
 });
 
-describe("isWhatsAppBookingMode", () => {
-  it("es false sin la variable", () => {
+describe("resolveBookingMode", () => {
+  it("sin env var manda la DB", () => {
     delete process.env.NEXT_PUBLIC_BOOKING_MODE;
-    expect(isWhatsAppBookingMode()).toBe(false);
+    expect(resolveBookingMode("online")).toBe("online");
+    expect(resolveBookingMode("whatsapp")).toBe("whatsapp");
   });
 
-  it("es true solo con el valor exacto 'whatsapp'", () => {
+  it("la env var es kill-switch: le gana a la DB en ambas direcciones", () => {
     process.env.NEXT_PUBLIC_BOOKING_MODE = "whatsapp";
-    expect(isWhatsAppBookingMode()).toBe(true);
+    expect(resolveBookingMode("online")).toBe("whatsapp");
     process.env.NEXT_PUBLIC_BOOKING_MODE = "online";
-    expect(isWhatsAppBookingMode()).toBe(false);
+    expect(resolveBookingMode("whatsapp")).toBe("online");
+  });
+
+  it("una env var con un valor que no es un modo válido se ignora", () => {
+    for (const v of ["", "1", "off", "WHATSAPP"]) {
+      process.env.NEXT_PUBLIC_BOOKING_MODE = v;
+      expect(resolveBookingMode("online")).toBe("online");
+    }
+  });
+});
+
+describe("isWhatsAppBookingMode", () => {
+  it("es true solo para el modo whatsapp", () => {
+    expect(isWhatsAppBookingMode("whatsapp")).toBe(true);
+    expect(isWhatsAppBookingMode("online")).toBe(false);
   });
 });
 
