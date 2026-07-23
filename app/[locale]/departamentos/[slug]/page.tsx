@@ -8,6 +8,8 @@ import { UNITS, getUnit } from "@/lib/units";
 import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 import { getBookingMode } from "@/lib/site-settings.server";
 import { routing } from "@/lib/i18n/routing";
+import { accommodationJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
+import { methodRates } from "@/lib/reservation/method-pricing";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -50,9 +52,23 @@ export default async function DepartamentoPage({
 
   const settings = await getRateSettings();
   const bookingMode = await getBookingMode();
+  // Precio de lista público = método tarjeta (comisión incluida, ver method-pricing.ts)
+  const listPrices = methodRates(settings, "card").nightly;
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            accommodationJsonLd({ unit, locale, nightlyPrice: listPrices[unit.slug] }),
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd({ locale, unit })) }}
+      />
       <SiteNav />
       <main>
         <UnitDetail unit={unit} locale={locale} prices={settings.nightly} bookingMode={bookingMode} />

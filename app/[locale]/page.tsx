@@ -31,7 +31,7 @@ const LODGING_JSONLD = {
   telephone: "+54 9 3757 652002",
   email: "arumalodge.iguazu@gmail.com",
   priceRange: "$$",
-  aggregateRating: undefined,
+  url: absoluteUrl("/es"),
   amenityFeature: [
     { "@type": "LocationFeatureSpecification", name: "Wi-Fi" },
     { "@type": "LocationFeatureSpecification", name: "Aire acondicionado" },
