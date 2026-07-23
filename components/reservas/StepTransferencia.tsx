@@ -6,7 +6,8 @@ import type { State } from "@/lib/reservation/reducer";
 import { createTransferReservation } from "@/lib/reservation/transfer";
 import { formatDateOnly } from "@/lib/reservation/booking";
 import type { RateSettings } from "@/lib/reservation/rate-settings";
-import { computeNights, computeTotal } from "@/lib/reservation/pricing";
+import { computeNights } from "@/lib/reservation/pricing";
+import { methodTotal, transferSavings } from "@/lib/reservation/method-pricing";
 import { BANK_DETAILS } from "@/lib/site";
 
 interface Props {
@@ -23,7 +24,9 @@ export function StepTransferencia({ state, settings, onPending }: Props) {
   const [processing, setProcessing] = useState(false);
 
   const nights = computeNights(state.checkIn!, state.checkOut!);
-  const total = computeTotal(settings.nightly[state.unitId], nights, settings.cleaningFee);
+  // Total del método TRANSFERENCIA (más barato que el precio de lista).
+  const total = methodTotal(settings, "transfer", state.unitId, nights);
+  const savings = transferSavings(settings, state.unitId, nights);
   const money = (n: number) => `$${new Intl.NumberFormat("es-AR").format(n)}`;
 
   const submit = async () => {
@@ -67,6 +70,12 @@ export function StepTransferencia({ state, settings, onPending }: Props) {
         <div style={row}><span style={{ color: "#6b665d" }}>{t("transferHolder")}</span><strong>{BANK_DETAILS.holder}</strong></div>
         <div style={{ ...row, borderBottom: "none" }}><span style={{ color: "#6b665d" }}>{t("transferAmount")}</span><strong>{money(total)}</strong></div>
       </div>
+
+      {savings > 0 && (
+        <p style={{ fontSize: 12.5, color: "#2f5d33", margin: "-12px 0 22px" }}>
+          {t("transferSaves", { amount: money(savings) })}
+        </p>
+      )}
 
       <label style={{ display: "block", fontSize: 13, color: "#6b665d", marginBottom: 8 }}>
         {t("transferUpload")}

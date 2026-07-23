@@ -4,7 +4,8 @@ import { uploadComprobante, removeComprobante, isAllowedMime, MAX_BYTES } from "
 import { insertReservation } from "@/lib/reservation/reservations.server";
 import { generateBookingCode } from "@/lib/reservation/code";
 import { getUnit } from "@/lib/units";
-import { computeNights, computeTotal } from "@/lib/reservation/pricing";
+import { computeNights } from "@/lib/reservation/pricing";
+import { methodTotal } from "@/lib/reservation/method-pricing";
 import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 import { isValidEmail } from "@/lib/reservation/validation";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
@@ -77,7 +78,8 @@ export async function POST(req: Request) {
   if (guests > unit.specs.guests) return bad();
   const nights = computeNights(new Date(checkIn), new Date(checkOut));
   const settings = await getRateSettings();
-  const total = computeTotal(settings.nightly[unit.slug], nights, settings.cleaningFee);
+  // Total del método TRANSFERENCIA (menor al precio de lista; ver method-pricing.ts)
+  const total = methodTotal(settings, "transfer", unit.slug, nights);
 
   // 1. Re-chequeo de disponibilidad (fail-closed).
   let available: boolean;

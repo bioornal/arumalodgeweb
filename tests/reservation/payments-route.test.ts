@@ -90,8 +90,12 @@ describe("POST /api/payments", () => {
     createCardPayment.mockResolvedValue({ id: "pay-1", status: "approved" });
     createBookingEvent.mockResolvedValue({ eventId: "evt-1" });
     await POST(post({ ...VALID, amount: 1, total: 1 }));
-    // tatu 4 huéspedes → $130.000 × 3 noches + $30.000 limpieza = $420.000
-    expect(createCardPayment.mock.calls[0][0].amount).toBe(420000);
+    // Precio de lista = método TARJETA con la comisión ya incluida (method-pricing.ts):
+    //   noche:    130.000 neto / (1 - 0,077) = 140.845,06 → redondeo ↑ a $100 = 140.900
+    //   3 noches: 140.900 × 3                                              = 422.700
+    //   limpieza:  30.000 neto / (1 - 0,077) =  32.502,71 → redondeo ↑ a $100 =  32.600
+    //   total:    422.700 + 32.600                                         = 455.300
+    expect(createCardPayment.mock.calls[0][0].amount).toBe(455300);
   });
 
   it("rejected → NO crea evento, responde 200 rejected", async () => {

@@ -8,21 +8,27 @@ import {
   computeSubtotal,
   computeTotal,
 } from "@/lib/reservation/pricing";
+import { methodRates, transferSavings, type PaymentMethod } from "@/lib/reservation/method-pricing";
 
 const money = (n: number) => "$" + new Intl.NumberFormat("es-AR").format(n);
 
 interface OrderSummaryProps {
   state: State;
   settings: RateSettings;
+  /** Método elegido en el paso Pago: el desglose muestra SUS precios. */
+  method?: PaymentMethod;
 }
 
-export function OrderSummary({ state, settings }: OrderSummaryProps) {
+export function OrderSummary({ state, settings, method = "card" }: OrderSummaryProps) {
   const t = useTranslations("reservas");
   const unit = getUnit(state.unitId)!;
   const nights = computeNights(state.checkIn, state.checkOut);
-  const nightly = settings.nightly[state.unitId];
+  const rates = methodRates(settings, method);
+  const nightly = rates.nightly[state.unitId];
+  const cleaningFee = rates.cleaningFee;
   const subtotal = computeSubtotal(nightly, nights);
-  const total = computeTotal(nightly, nights, settings.cleaningFee);
+  const total = computeTotal(nightly, nights, cleaningFee);
+  const savings = transferSavings(settings, state.unitId, nights);
 
   // Format date range
   const formatDate = (d: Date) => format(d, "d MMM");
@@ -100,7 +106,7 @@ export function OrderSummary({ state, settings }: OrderSummaryProps) {
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14 }}>
           <span style={{ color: "#9fb0a3" }}>{t("cleaning")}</span>
           <span style={{ color: "#F8F5F0" }}>
-            {nights > 0 ? money(settings.cleaningFee) : "—"}
+            {nights > 0 ? money(cleaningFee) : "—"}
           </span>
         </div>
       </div>
@@ -122,6 +128,13 @@ export function OrderSummary({ state, settings }: OrderSummaryProps) {
           {nights > 0 ? money(total) : "—"}
         </span>
       </div>
+
+      {/* Ahorro eligiendo transferencia (solo si está mirando tarjeta) */}
+      {method === "card" && nights > 0 && savings > 0 && (
+        <div style={{ fontSize: 12.5, color: "#9DBF9E", marginTop: 12 }}>
+          {t("transferSaves", { amount: money(savings) })}
+        </div>
+      )}
 
       {/* No fees note */}
       <div style={{ fontSize: 12, color: "#7e9184", marginTop: 10, lineHeight: 1.5 }}>

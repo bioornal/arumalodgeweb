@@ -8,7 +8,8 @@ import {
 } from "@/lib/reservation/payments.server";
 import { generateBookingCode } from "@/lib/reservation/code";
 import { getUnit } from "@/lib/units";
-import { computeNights, computeTotal } from "@/lib/reservation/pricing";
+import { computeNights } from "@/lib/reservation/pricing";
+import { methodTotal } from "@/lib/reservation/method-pricing";
 import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 import { isValidEmail } from "@/lib/reservation/validation";
 import { insertReservation } from "@/lib/reservation/reservations.server";
@@ -80,7 +81,8 @@ export async function POST(req: Request) {
 
   const nights = computeNights(new Date(checkIn), new Date(checkOut));
   const settings = await getRateSettings();
-  const total = computeTotal(settings.nightly[unit.slug], nights, settings.cleaningFee);
+  // Precio de lista = método tarjeta (comisión MP incluida; ver method-pricing.ts)
+  const total = methodTotal(settings, "card", unit.slug, nights);
 
   // Re-chequeo en tiempo real (fail-closed)
   let available: boolean;

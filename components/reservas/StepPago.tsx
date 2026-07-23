@@ -7,7 +7,8 @@ import type { State } from "@/lib/reservation/reducer";
 import { createPayment, type PaymentResult } from "@/lib/reservation/payments";
 import { formatDateOnly } from "@/lib/reservation/booking";
 import type { RateSettings } from "@/lib/reservation/rate-settings";
-import { computeNights, computeTotal } from "@/lib/reservation/pricing";
+import { computeNights } from "@/lib/reservation/pricing";
+import { methodTotal, type PaymentMethod } from "@/lib/reservation/method-pricing";
 import { StepTransferencia } from "./StepTransferencia";
 
 const MOCK = process.env.NEXT_PUBLIC_PAYMENTS_MOCK === "1";
@@ -16,19 +17,22 @@ const PUBLIC_KEY = process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY ?? "";
 interface StepPagoProps {
   state: State;
   settings: RateSettings;
+  method: PaymentMethod;
+  onMethodChange: (m: PaymentMethod) => void;
   onApproved: (code: string) => void;
   onPending: (code: string) => void;
 }
 
-export function StepPago({ state, settings, onApproved, onPending }: StepPagoProps) {
+export function StepPago({ state, settings, method, onMethodChange, onApproved, onPending }: StepPagoProps) {
   const t = useTranslations("reservas");
   const locale = useLocale();
   const [error, setError] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
-  const [method, setMethod] = useState<"card" | "transfer">("card");
 
   const nights = computeNights(state.checkIn, state.checkOut);
-  const total = computeTotal(settings.nightly[state.unitId], nights, settings.cleaningFee);
+  // Total del método TARJETA (precio de lista): es lo que muestra este paso y
+  // lo que cobra el Brick. El de transferencia lo muestra StepTransferencia.
+  const total = methodTotal(settings, "card", state.unitId, nights);
 
   useEffect(() => {
     if (!MOCK && PUBLIC_KEY) initMercadoPago(PUBLIC_KEY, { locale: "es-AR" });
@@ -97,7 +101,7 @@ export function StepPago({ state, settings, onApproved, onPending }: StepPagoPro
 
   return (
     <div>
-      <MethodTabs method={method} setMethod={setMethod} t={t} />
+      <MethodTabs method={method} setMethod={onMethodChange} t={t} />
       {method === "transfer" ? (
         <StepTransferencia state={state} settings={settings} onPending={onPending} />
       ) : (

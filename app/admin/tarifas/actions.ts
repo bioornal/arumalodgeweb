@@ -19,6 +19,8 @@ export async function saveRates(
     cleaning_fee: String(formData.get("cleaning_fee") ?? ""),
     base_guests: String(formData.get("base_guests") ?? ""),
     extra_guest_fee: String(formData.get("extra_guest_fee") ?? ""),
+    card_fee_pct: String(formData.get("card_fee_pct") ?? ""),
+    transfer_fee_pct: String(formData.get("transfer_fee_pct") ?? ""),
   } satisfies RateSettingsInput;
 
   const parsed = parseRateSettingsInput(raw);

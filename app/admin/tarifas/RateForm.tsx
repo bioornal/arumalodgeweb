@@ -112,6 +112,52 @@ export function RateForm({ settings }: { settings: RateSettings }) {
         </p>
       </section>
 
+      {/* Costos por canal de cobro */}
+      <section style={card}>
+        <h2 style={h2}>Costos por canal de cobro</h2>
+        <p style={hint}>
+          Cargá lo que te cuesta cada canal, no lo que querés cobrar de más. Los precios
+          de arriba son lo que querés recibir <strong>neto</strong>: el sitio le suma el
+          costo del canal y muestra el precio ya con todo incluido, redondeado a $100.
+          El precio de lista que ve el público es el de tarjeta; la transferencia se
+          presenta como ahorro.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
+          <div>
+            <label htmlFor="card_fee_pct" style={label}>
+              Comisión tarjeta (%)
+            </label>
+            <input
+              id="card_fee_pct"
+              name="card_fee_pct"
+              type="number"
+              min={0}
+              max={30}
+              step={0.1}
+              required
+              defaultValue={settings.cardFeePct}
+              style={input}
+            />
+          </div>
+          <div>
+            <label htmlFor="transfer_fee_pct" style={label}>
+              Costo transferencia (%)
+            </label>
+            <input
+              id="transfer_fee_pct"
+              name="transfer_fee_pct"
+              type="number"
+              min={0}
+              max={30}
+              step={0.1}
+              required
+              defaultValue={settings.transferFeePct}
+              style={input}
+            />
+          </div>
+        </div>
+      </section>
+
       <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         <button
           type="submit"
