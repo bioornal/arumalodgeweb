@@ -90,3 +90,25 @@ create trigger rate_settings_set_updated_at
 alter table public.rate_settings
   add column if not exists card_fee_pct     numeric(5,2) not null default 7.7,
   add column if not exists transfer_fee_pct numeric(5,2) not null default 5;
+
+-- Configuración operativa del sitio (2026-07-23), editable desde
+-- /admin/configuracion. Fila única id=1, mismo criterio que rate_settings.
+-- booking_mode='whatsapp' pausa la reserva online: los CTAs derivan a WhatsApp,
+-- /reservas redirige a /tarifas y los APIs de pago responden 503.
+create table if not exists public.site_settings (
+  id           smallint primary key default 1 check (id = 1),
+  booking_mode text not null default 'whatsapp'
+               check (booking_mode in ('whatsapp', 'online')),
+  updated_at   timestamptz not null default now()
+);
+
+-- Fila inicial en el modo CERRADO: abrir el cobro es siempre una acción explícita.
+insert into public.site_settings (id) values (1) on conflict (id) do nothing;
+
+-- RLS sin policies: solo la service role key (server-only) entra.
+alter table public.site_settings enable row level security;
+
+drop trigger if exists site_settings_set_updated_at on public.site_settings;
+create trigger site_settings_set_updated_at
+  before update on public.site_settings
+  for each row execute function public.set_updated_at();
