@@ -22,6 +22,7 @@ const insertReservation = vi.fn();
 vi.mock("@/lib/reservation/reservations.server", () => ({
   insertReservation: (...a: unknown[]) => insertReservation(...a),
   upsertConfirmedByCode: vi.fn(),
+  generateUniqueBookingCode: vi.fn(async () => "ARM-2026-TEST"),
 }));
 
 const sendConfirmationEmailOnce = vi.fn();

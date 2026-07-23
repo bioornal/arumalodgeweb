@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { isRangeAvailable, createPendingEvent, deleteEvent } from "@/lib/reservation/calendar.server";
 import { uploadComprobante, removeComprobante, isAllowedMime, MAX_BYTES } from "@/lib/reservation/comprobante.server";
-import { insertReservation } from "@/lib/reservation/reservations.server";
-import { generateBookingCode } from "@/lib/reservation/code";
+import { insertReservation, generateUniqueBookingCode } from "@/lib/reservation/reservations.server";
 import { getUnit } from "@/lib/units";
 import { computeNights } from "@/lib/reservation/pricing";
 import { methodTotal } from "@/lib/reservation/method-pricing";
@@ -99,7 +98,13 @@ export async function POST(req: Request) {
   }
   if (!available) return NextResponse.json({ error: "conflict" }, { status: 409 });
 
-  const code = generateBookingCode();
+  let code: string;
+  try {
+    code = await generateUniqueBookingCode();
+  } catch (err) {
+    console.error("[transfer] código único fallo:", err instanceof Error ? err.message : err);
+    return NextResponse.json({ error: "code" }, { status: 502 });
+  }
 
   // 2. Subir comprobante.
   let comprobantePath: string;

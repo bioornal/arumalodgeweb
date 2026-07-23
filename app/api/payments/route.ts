@@ -6,13 +6,12 @@ import {
   isMockMode,
   type PaymentOutcome,
 } from "@/lib/reservation/payments.server";
-import { generateBookingCode } from "@/lib/reservation/code";
 import { getUnit } from "@/lib/units";
 import { computeNights } from "@/lib/reservation/pricing";
 import { methodTotal } from "@/lib/reservation/method-pricing";
 import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 import { isValidEmail } from "@/lib/reservation/validation";
-import { insertReservation } from "@/lib/reservation/reservations.server";
+import { insertReservation, generateUniqueBookingCode } from "@/lib/reservation/reservations.server";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
 import { getBookingMode } from "@/lib/site-settings.server";
 import { sendConfirmationEmailOnce } from "@/lib/reservation/email.server";
@@ -105,7 +104,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "conflict" }, { status: 409 });
   }
 
-  const code = generateBookingCode();
+  let code: string;
+  try {
+    code = await generateUniqueBookingCode();
+  } catch (err) {
+    console.error("[payments] código único fallo:", err instanceof Error ? err.message : err);
+    return NextResponse.json({ error: "code" }, { status: 502 });
+  }
   const metadata = {
     unit_id: unitId,
     unit_name: unit.name,

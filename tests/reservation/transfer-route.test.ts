@@ -30,6 +30,7 @@ vi.mock("@/lib/reservation/comprobante.server", async () => {
 const insertReservation = vi.fn();
 vi.mock("@/lib/reservation/reservations.server", () => ({
   insertReservation: (...a: unknown[]) => insertReservation(...a),
+  generateUniqueBookingCode: vi.fn(async () => "ARM-2026-TEST"),
 }));
 
 // Tarifas: siempre los defaults — el test no depende de la DB ni del admin.
