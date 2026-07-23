@@ -35,6 +35,9 @@ export default async function AdminReservasPage({
           <a href="/admin/tarifas" style={{ fontSize: 13, color: "#6b665d", border: "1px solid #E7E0D4", borderRadius: 4, padding: "8px 14px", textDecoration: "none" }}>
             Tarifas
           </a>
+          <a href="/admin/configuracion" style={{ fontSize: 13, color: "#6b665d", border: "1px solid #E7E0D4", borderRadius: 4, padding: "8px 14px", textDecoration: "none" }}>
+            Configuración
+          </a>
           <a href="/admin/pago-prueba" style={{ fontSize: 13, color: "#6b665d", border: "1px solid #E7E0D4", borderRadius: 4, padding: "8px 14px", textDecoration: "none" }}>
             Pago de prueba
           </a>
