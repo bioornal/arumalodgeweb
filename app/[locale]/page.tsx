@@ -11,6 +11,7 @@ import { CtaReserva } from "@/components/home/CtaReserva";
 import { Contacto } from "@/components/home/Contacto";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
+import { getBookingMode } from "@/lib/site-settings.server";
 
 const LODGING_JSONLD = {
   "@context": "https://schema.org",
@@ -91,6 +92,7 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const bookingMode = await getBookingMode();
   return (
     <>
       <script
@@ -106,7 +108,7 @@ export default async function HomePage({
         <UnitsGrid />
         <Experiencias />
         <RelatoImagenes />
-        <CtaReserva />
+        <CtaReserva bookingMode={bookingMode} />
         <Contacto />
       </main>
       <SiteFooter />

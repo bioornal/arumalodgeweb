@@ -4,6 +4,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { routing } from "@/lib/i18n/routing";
 import { ReservaFlow } from "@/components/reservas/ReservaFlow";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
+import { getBookingMode } from "@/lib/site-settings.server";
 import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 
 export function generateStaticParams() {
@@ -39,7 +40,7 @@ export default async function ReservasPage({
   setRequestLocale(locale);
 
   // Reservas online pausadas: el checkout deriva a tarifas (reserva vía WhatsApp).
-  if (isWhatsAppBookingMode()) {
+  if (isWhatsAppBookingMode(await getBookingMode())) {
     redirect(`/${locale}/tarifas`);
   }
 

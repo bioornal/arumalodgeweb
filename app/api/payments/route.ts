@@ -14,6 +14,7 @@ import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 import { isValidEmail } from "@/lib/reservation/validation";
 import { insertReservation } from "@/lib/reservation/reservations.server";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
+import { getBookingMode } from "@/lib/site-settings.server";
 import { sendConfirmationEmailOnce } from "@/lib/reservation/email.server";
 import type { UnitId } from "@/lib/reservation/reducer";
 
@@ -39,8 +40,9 @@ function isMockPay(v: unknown): v is MockPay {
 }
 
 export async function POST(req: Request) {
-  // Reservas online pausadas (modo WhatsApp): no se aceptan pagos.
-  if (isWhatsAppBookingMode()) {
+  // Reservas online pausadas (modo WhatsApp): no se cobra.
+  // Se lee server-side: el cliente nunca decide si se puede cobrar.
+  if (isWhatsAppBookingMode(await getBookingMode())) {
     return NextResponse.json({ error: "bookings_paused" }, { status: 503 });
   }
 

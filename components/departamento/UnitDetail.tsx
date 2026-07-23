@@ -6,6 +6,7 @@ import { Link } from "@/lib/i18n/navigation";
 import { StickyBookingCard } from "./StickyBookingCard";
 import { UNITS } from "@/lib/units";
 import type { Unit, UnitSlug } from "@/lib/units";
+import type { BookingMode } from "@/lib/booking-mode";
 
 // Per-unit fixed characteristics that can't be derived purely from numbers
 const UNIT_FEAT: Record<
@@ -163,10 +164,12 @@ export function UnitDetail({
   unit,
   locale,
   prices,
+  bookingMode,
 }: {
   unit: Unit;
   locale: string;
   prices: Record<UnitSlug, number>; // tarifa actual por noche (DB, vía getRateSettings)
+  bookingMode: BookingMode;
 }) {
   const t = useTranslations("departamento");
   const tn = useTranslations("nav");
@@ -371,7 +374,7 @@ export function UnitDetail({
           </div>
 
           {/* RIGHT — sticky booking card */}
-          <StickyBookingCard unit={unit} price={prices[unit.slug]} />
+          <StickyBookingCard unit={unit} price={prices[unit.slug]} bookingMode={bookingMode} />
         </div>
       </section>
 

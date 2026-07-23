@@ -4,12 +4,12 @@ import { Link } from "@/lib/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealTitle } from "@/components/motion/RevealTitle";
 import { SelvaFigure } from "@/components/motion/SelvaFigure";
-import { isWhatsAppBookingMode } from "@/lib/booking-mode";
+import { isWhatsAppBookingMode, type BookingMode } from "@/lib/booking-mode";
 import { waLink } from "@/lib/contact";
 
-export function CtaReserva() {
+export function CtaReserva({ bookingMode }: { bookingMode: BookingMode }) {
   const t = useTranslations("cta");
-  const whatsappMode = isWhatsAppBookingMode();
+  const whatsappMode = isWhatsAppBookingMode(bookingMode);
 
   return (
     <section id="reservar" className="relative bg-marfil py-20 md:py-[150px]">

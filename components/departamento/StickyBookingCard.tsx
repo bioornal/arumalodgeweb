@@ -1,13 +1,21 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 import type { Unit } from "@/lib/units";
-import { isWhatsAppBookingMode } from "@/lib/booking-mode";
+import { isWhatsAppBookingMode, type BookingMode } from "@/lib/booking-mode";
 import { waLink } from "@/lib/contact";
 
-export function StickyBookingCard({ unit, price }: { unit: Unit; price: number }) {
+export function StickyBookingCard({
+  unit,
+  price,
+  bookingMode,
+}: {
+  unit: Unit;
+  price: number;
+  bookingMode: BookingMode;
+}) {
   const t = useTranslations("departamento");
   const tb = useTranslations("bookingBar");
-  const whatsappMode = isWhatsAppBookingMode();
+  const whatsappMode = isWhatsAppBookingMode(bookingMode);
   const ctaClass =
     "mt-[18px] block text-center bg-terracota text-marfil text-[12.5px] uppercase tracking-[.1em] px-4 py-4 rounded-[3px] no-underline transition-[background,transform] duration-300 hover:bg-terracota-hover hover:-translate-y-0.5";
 

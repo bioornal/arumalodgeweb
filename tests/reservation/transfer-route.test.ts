@@ -40,6 +40,10 @@ vi.mock("@/lib/reservation/rate-settings.server", async () => {
   return { getRateSettings: () => Promise.resolve(DEFAULT_RATE_SETTINGS) };
 });
 
+vi.mock("@/lib/site-settings.server", () => ({
+  getBookingMode: vi.fn(async () => "online" as const),
+}));
+
 import { POST } from "@/app/api/reservations/transfer/route";
 
 function form(fields: Record<string, string>, file?: File) {
@@ -138,5 +142,17 @@ describe("POST /api/reservations/transfer", () => {
 
     await POST(form({ ...VALID, locale: "xx" }, goodFile()));
     expect(insertReservation.mock.calls[2][0].locale).toBe("es");
+  });
+
+  it("en modo whatsapp responde 503 y no acepta la transferencia", async () => {
+    const { getBookingMode } = await import("@/lib/site-settings.server");
+    vi.mocked(getBookingMode).mockResolvedValueOnce("whatsapp");
+
+    const res = await POST(form(VALID, goodFile()));
+
+    expect(res.status).toBe(503);
+    expect(await res.json()).toEqual({ error: "bookings_paused" });
+    expect(isRangeAvailable).not.toHaveBeenCalled();
+    expect(uploadComprobante).not.toHaveBeenCalled();
   });
 });

@@ -4,7 +4,7 @@ import { ImageSlot } from "@/components/ui/ImageSlot";
 import { buildCheckoutUrl, type RateQuery } from "@/lib/reservation/search";
 import type { UnitRate } from "@/lib/reservation/rates.server";
 import type { Unit, UnitSlug } from "@/lib/units";
-import { isWhatsAppBookingMode } from "@/lib/booking-mode";
+import { isWhatsAppBookingMode, type BookingMode } from "@/lib/booking-mode";
 import { waLink } from "@/lib/contact";
 
 function fmtDay(iso: string, locale: string): string {
@@ -19,12 +19,13 @@ interface UnitRateCardProps {
   rate: UnitRate | null; // null = sin fechas elegidas (modo "desde")
   query: RateQuery | null;
   prices: Record<UnitSlug, number>; // tarifa actual por noche (DB, vía getRateSettings)
+  bookingMode: BookingMode;
 }
 
-export function UnitRateCard({ unit, rate, query, prices }: UnitRateCardProps) {
+export function UnitRateCard({ unit, rate, query, prices, bookingMode }: UnitRateCardProps) {
   const t = useTranslations("tarifas");
   const locale = useLocale();
-  const whatsappMode = isWhatsAppBookingMode();
+  const whatsappMode = isWhatsAppBookingMode(bookingMode);
   const overCapacity = !!query && query.guests > unit.specs.guests;
   const bookable = !!rate && rate.available && !overCapacity;
   const nightly = rate ? rate.nightly : prices[unit.slug];

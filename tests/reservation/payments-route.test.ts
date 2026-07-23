@@ -37,6 +37,10 @@ vi.mock("@/lib/reservation/rate-settings.server", async () => {
   return { getRateSettings: () => Promise.resolve(DEFAULT_RATE_SETTINGS) };
 });
 
+vi.mock("@/lib/site-settings.server", () => ({
+  getBookingMode: vi.fn(async () => "online" as const),
+}));
+
 import { POST } from "@/app/api/payments/route";
 
 const CARD = { token: "tok-1", paymentMethodId: "visa", installments: 1 };
@@ -202,5 +206,16 @@ describe("POST /api/payments", () => {
     expect(insertReservation).toHaveBeenCalledOnce();
     expect(insertReservation.mock.calls[0][0].status).toBe("pending");
     expect(createBookingEvent).not.toHaveBeenCalled();
+  });
+
+  it("en modo whatsapp responde 503 y no cobra", async () => {
+    const { getBookingMode } = await import("@/lib/site-settings.server");
+    vi.mocked(getBookingMode).mockResolvedValueOnce("whatsapp");
+
+    const res = await POST(post(VALID));
+
+    expect(res.status).toBe(503);
+    expect(await res.json()).toEqual({ error: "bookings_paused" });
+    expect(createCardPayment).not.toHaveBeenCalled();
   });
 });

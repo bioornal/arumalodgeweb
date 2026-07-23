@@ -6,6 +6,7 @@ import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { UnitDetail } from "@/components/departamento/UnitDetail";
 import { UNITS, getUnit } from "@/lib/units";
 import { getRateSettings } from "@/lib/reservation/rate-settings.server";
+import { getBookingMode } from "@/lib/site-settings.server";
 import { routing } from "@/lib/i18n/routing";
 
 export function generateStaticParams() {
@@ -48,12 +49,13 @@ export default async function DepartamentoPage({
   if (!unit) notFound();
 
   const settings = await getRateSettings();
+  const bookingMode = await getBookingMode();
 
   return (
     <>
       <SiteNav />
       <main>
-        <UnitDetail unit={unit} locale={locale} prices={settings.nightly} />
+        <UnitDetail unit={unit} locale={locale} prices={settings.nightly} bookingMode={bookingMode} />
       </main>
       <SiteFooter />
       <WhatsAppFab />

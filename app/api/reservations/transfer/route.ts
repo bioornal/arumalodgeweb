@@ -9,6 +9,7 @@ import { methodTotal } from "@/lib/reservation/method-pricing";
 import { getRateSettings } from "@/lib/reservation/rate-settings.server";
 import { isValidEmail } from "@/lib/reservation/validation";
 import { isWhatsAppBookingMode } from "@/lib/booking-mode";
+import { getBookingMode } from "@/lib/site-settings.server";
 import type { UnitId } from "@/lib/reservation/reducer";
 
 const VALID_UNITS: UnitId[] = ["yvyra", "mberu", "tatu"];
@@ -31,7 +32,8 @@ function isFileLike(v: unknown): v is File {
 
 export async function POST(req: Request) {
   // Reservas online pausadas (modo WhatsApp): no se aceptan reservas por transferencia.
-  if (isWhatsAppBookingMode()) {
+  // Se lee server-side: el cliente nunca decide si se puede cobrar.
+  if (isWhatsAppBookingMode(await getBookingMode())) {
     return NextResponse.json({ error: "bookings_paused" }, { status: 503 });
   }
 
