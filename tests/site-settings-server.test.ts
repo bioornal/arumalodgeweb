@@ -57,14 +57,20 @@ describe("getSiteSettings", () => {
     expect((await getSiteSettings()).bookingMode).toBe("whatsapp");
   });
 
-  it("FAIL-SAFE: un error posterior NO conserva el 'online' memoizado", async () => {
-    maybeSingle.mockResolvedValue({ data: { booking_mode: "online" }, error: null });
-    const { getSiteSettings, invalidateSiteSettingsCache } = await freshModule();
-    expect((await getSiteSettings()).bookingMode).toBe("online");
+  it("FAIL-SAFE: un error tras vencer el TTL del memo 'online' NO lo conserva", async () => {
+    vi.useFakeTimers();
+    try {
+      vi.setSystemTime(0);
+      maybeSingle.mockResolvedValue({ data: { booking_mode: "online" }, error: null });
+      const { getSiteSettings } = await freshModule();
+      expect((await getSiteSettings()).bookingMode).toBe("online"); // memo = { at: 0, value: online }
 
-    invalidateSiteSettingsCache();
-    maybeSingle.mockRejectedValue(new Error("network down"));
-    expect((await getSiteSettings()).bookingMode).toBe("whatsapp");
+      vi.setSystemTime(30_001); // TTL (30s) vencido: memo sigue no-null, pero stale
+      maybeSingle.mockRejectedValue(new Error("network down"));
+      expect((await getSiteSettings()).bookingMode).toBe("whatsapp");
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("sin fila (tabla vacía) cae al default cerrado", async () => {
