@@ -6,11 +6,19 @@ import { FilmGrain } from "@/components/layout/FilmGrain";
 import { FxWatchdog } from "@/components/motion/FxWatchdog";
 import { fxDefaultAttr, FX_BOOT_SCRIPT } from "@/lib/fx";
 import { LenisProvider } from "@/components/motion/LenisProvider";
+import { SITE_URL } from "@/lib/seo";
 import "../globals.css";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+// metadataBase resuelve todas las URLs relativas de metadata (OG, canonical,
+// alternates) contra el dominio real. Sin esto Next las emite relativas y los
+// crawlers de redes sociales no las resuelven.
+export const metadata = {
+  metadataBase: new URL(SITE_URL),
+};
 
 export default async function LocaleLayout({
   children,

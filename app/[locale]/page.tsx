@@ -12,6 +12,7 @@ import { Contacto } from "@/components/home/Contacto";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { getBookingMode } from "@/lib/site-settings.server";
+import { SITE_URL, absoluteUrl } from "@/lib/seo";
 
 const LODGING_JSONLD = {
   "@context": "https://schema.org",
@@ -48,14 +49,19 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" });
   const title = t("title");
   const description = t("description");
-  const siteUrl = "https://aruma-lodge.netlify.app";
+  const siteUrl = SITE_URL;
   const canonicalUrl = `${siteUrl}/${locale}`;
   return {
     title,
     description,
     alternates: {
       canonical: canonicalUrl,
-      languages: { es: "/es", en: "/en", pt: "/pt" },
+      languages: {
+        es: absoluteUrl("/es"),
+        en: absoluteUrl("/en"),
+        pt: absoluteUrl("/pt"),
+        "x-default": absoluteUrl("/es"),
+      },
     },
     openGraph: {
       title,
