@@ -8,7 +8,7 @@ import { formatDateOnly } from "@/lib/reservation/booking";
 import type { RateSettings } from "@/lib/reservation/rate-settings";
 import { computeNights } from "@/lib/reservation/pricing";
 import { methodTotal, transferSavings } from "@/lib/reservation/method-pricing";
-import { BANK_DETAILS } from "@/lib/site";
+import { BANK_DETAILS, bankDetailsConfigured } from "@/lib/site";
 
 interface Props {
   state: State;
@@ -54,6 +54,17 @@ export function StepTransferencia({ state, settings, onPending }: Props) {
     display: "flex", justifyContent: "space-between", gap: 16,
     padding: "11px 0", borderBottom: "1px solid #ece5d8", fontSize: 14,
   };
+
+  if (!bankDetailsConfigured()) {
+    return (
+      <div style={{ padding: 24, background: "#FBF3EC", border: "1px solid #E0C9B4", borderRadius: 6 }}>
+        <p style={{ margin: 0, fontSize: 14, color: "#8a3b1d", lineHeight: 1.7 }}>
+          El pago por transferencia no está disponible en este momento. Elegí pagar con
+          tarjeta, o escribinos por WhatsApp y coordinamos la reserva.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div>
