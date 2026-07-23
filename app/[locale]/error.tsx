@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { waLink } from "@/lib/contact";
 
 // Error boundary del segmento [locale]. Sin esto, un throw en cualquier página
 // pública muestra la pantalla cruda de Next, sin marca ni salida para el usuario.
@@ -43,7 +44,7 @@ export default function LocaleError({
       </p>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
         <button onClick={reset} style={btnPrimary}>Reintentar</button>
-        <a href="https://wa.me/5493757652002" style={btnSecondary}>Escribinos por WhatsApp</a>
+        <a href={waLink()} style={btnSecondary} target="_blank" rel="noopener">Escribinos por WhatsApp</a>
       </div>
     </main>
   );
