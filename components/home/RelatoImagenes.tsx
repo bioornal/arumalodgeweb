@@ -54,7 +54,8 @@ export function RelatoImagenes() {
 
   return (
     <section id="galeria" className="relative bg-arena py-16 md:py-[110px] overflow-hidden">
-      <SelvaFigure kind="tucan" className="top-14 left-[4%]" size={130} flip />
+      {/* En el aire de arriba (padding 110px): top-1 + 100 no llega al kicker */}
+      <SelvaFigure kind="coati" className="top-1 left-[5%]" size={100} />
 
       <div className="relative z-[1] mx-auto max-w-[1320px] px-5 md:px-12">
         {/* Header */}

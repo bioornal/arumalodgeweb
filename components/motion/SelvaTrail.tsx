@@ -11,6 +11,36 @@ const BRONCE = "#9A7B4F";
 const TERRACOTA = "#A04B2A";
 
 type Pt = { x: number; y: number };
+type Box = { left: number; right: number; top: number; bottom: number };
+
+// Une las cajas que se tocan (transitivamente) en su envolvente: dos bloques
+// de copy contiguos son un solo obstáculo para la curva, no dos.
+function mergeRects(boxes: Box[]) {
+  const out: Box[] = [];
+  boxes.forEach((box) => {
+    let cur = box;
+    let i = 0;
+    while (i < out.length) {
+      const o = out[i];
+      const overlaps =
+        cur.left < o.right && cur.right > o.left && cur.top < o.bottom && cur.bottom > o.top;
+      if (!overlaps) {
+        i++;
+        continue;
+      }
+      cur = {
+        left: Math.min(cur.left, o.left),
+        right: Math.max(cur.right, o.right),
+        top: Math.min(cur.top, o.top),
+        bottom: Math.max(cur.bottom, o.bottom),
+      };
+      out.splice(i, 1);
+      i = 0; // la envolvente nueva puede tocar cajas ya revisadas
+    }
+    out.push(cur);
+  });
+  return out;
+}
 
 // Curva suave (Catmull-Rom → Bézier) que pasa por todos los puntos. Los
 // puntos de control se limitan a [minX, maxX]: sin esto, tramos con mucho
@@ -144,15 +174,16 @@ export function SelvaTrail() {
           }
         });
 
-        // Densifica el trazado (un punto cada ~60px de bajada, menos que el
+        // Densifica el trazado (un punto cada PASO px de bajada, menos que el
         // alto de cualquier bloque de texto expandido) para poder desviarlo
         // localmente sin deformar el resto de la curva.
+        const PASO = 60;
         const pts: BPt[] = [];
         for (let i = 0; i < base.length - 1; i++) {
           const a = base[i];
           const b = base[i + 1];
           pts.push(a);
-          const steps = Math.floor((b.y - a.y) / 60);
+          const steps = Math.floor((b.y - a.y) / PASO);
           for (let s = 1; s < steps; s++) {
             const t = s / steps;
             pts.push({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
@@ -176,8 +207,13 @@ export function SelvaTrail() {
           }
           return false;
         };
-        const avoidRects = Array.from(
-          main.querySelectorAll<HTMLElement>("section h1, section h2, section h3, section p"),
+        // Los headings y <p> se detectan solos; el copy suelto en <div> (p. ej.
+        // la bajada de cada tarjeta de departamento) se marca a mano con
+        // data-trail-avoid.
+        const rawRects = Array.from(
+          main.querySelectorAll<HTMLElement>(
+            "section h1, section h2, section h3, section p, section [data-trail-avoid]",
+          ),
         )
           .filter((el) => !inMediaCard(el))
           .map((el) => {
@@ -191,6 +227,14 @@ export function SelvaTrail() {
             };
           })
           .filter((r): r is NonNullable<typeof r> => r !== null);
+
+        // Fusiona los bloques que se solapan en UNO solo. Sin esto cada rect
+        // decide su lado por separado: en la grilla de departamentos la curva
+        // salía por la derecha del <h3> (angosto) y caía justo dentro de la
+        // bajada (ancha), que la empujaba a la tarjeta siguiente, y así en
+        // cascada cruzando todo el texto. Fusionados, el bloque entero se
+        // esquiva de una y la línea sale limpia por el margen.
+        const avoidRects = mergeRects(rawRects);
 
         avoidRects.forEach((rect) => {
           const inside = pts.filter(
@@ -211,17 +255,21 @@ export function SelvaTrail() {
             p.x = goLeft ? Math.min(p.x, edge) : Math.max(p.x, edge);
             p.x = Math.min(W - 20, Math.max(20, p.x));
           });
-          // Feathering: los puntos justo antes/después del bloque se acercan
-          // a medias al borde, para que la curva suavizada llegue alineada y
-          // no corte la esquina del rect
+          // Feathering: los puntos de entrada y salida del bloque también se
+          // corren, para que la curva llegue alineada al borde.
           pts.forEach((p) => {
             if (p.fixed) return;
-            const nearBand =
-              (p.y > rect.top - 80 && p.y <= rect.top) ||
-              (p.y >= rect.bottom && p.y < rect.bottom + 80);
-            if (!nearBand) return;
-            const blended = (p.x + edge) / 2;
-            p.x = goLeft ? Math.min(p.x, blended) : Math.max(p.x, blended);
+            const dist =
+              p.y <= rect.top ? rect.top - p.y : p.y >= rect.bottom ? p.y - rect.bottom : -1;
+            if (dist < 0 || dist > 150) return;
+            // Hasta un paso de densificado el punto se pega al borde entero:
+            // si el vértice de entrada quedara libre, el tramo suavizado entre
+            // ese vértice y el primero ya desviado corta la esquina del bloque
+            // (era lo que hacía rozar el título de la primera tarjeta).
+            // Más lejos alcanza con medio camino, así la aproximación no queda
+            // escuadrada.
+            const target = dist <= PASO + 4 ? edge : (p.x + edge) / 2;
+            p.x = goLeft ? Math.min(p.x, target) : Math.max(p.x, target);
             p.x = Math.min(W - 20, Math.max(20, p.x));
           });
         });

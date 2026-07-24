@@ -7,21 +7,31 @@ import { fxAllowed } from "@/lib/fx";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export type FigureKind = "mariposa" | "tucan" | "hoja";
+export type FigureKind = "mariposa" | "coati" | "bambu";
 
 const WING_FORE = "M47 52 C 30 24, 10 22, 8 38 C 7 50, 26 56, 47 55 Z";
 const WING_HIND = "M47 57 C 32 62, 20 78, 30 84 C 40 89, 48 72, 47 58 Z";
 const ANTENAS = "M50 42 C 46 32, 41 27, 37 24 M50 42 C 54 32, 59 27, 63 24";
 
-const TUCAN_BODY =
-  "M55 34 C 70 32, 80 44, 79 58 C 78 74, 66 86, 53 84 C 41 82, 35 71, 37 58 C 39 46, 45 36, 55 34 Z";
-const TUCAN_PICO =
-  "M56 36 C 47 25, 28 20, 13 27 C 6 30.5, 7 38, 15 40 C 31 44, 47 43, 57 42 Z";
-const TUCAN_COLA = "M62 80 C 68 88, 71 96, 64 97 C 57 98, 53 89, 55 83 Z";
+// Coatí (Nasua nasua) de perfil, mirando a la derecha: hocico largo caído y
+// cola erguida y anillada son los dos rasgos que lo hacen reconocible en
+// silueta, así que van marcados de más.
+const COATI_CUERPO =
+  "M30 62 C 30 52, 42 47, 54 47 C 68 47, 76 53, 76 62 C 76 71, 66 76, 53 76 C 40 76, 30 71, 30 62 Z";
+const COATI_CABEZA =
+  "M67 54 C 66 45, 72 38, 80 38 C 84 38, 88 40, 90 44 C 93 47, 94 52, 92 55 C 96 57, 99 60, 98 62 C 96 64, 90 62, 86 60 C 80 61, 71 60, 67 54 Z";
+const COATI_COLA =
+  "M32 60 C 22 55, 16 42, 17 26 C 18 15, 22 7, 26 4 C 30 7, 27 16, 26 28 C 25 41, 31 50, 39 53 Z";
+const COATI_PATAS =
+  "M37 73 C 35 79, 34 85, 34 90 L 40 90 C 40 84, 41 78, 43 74 Z M48 75 C 47 80, 46 85, 46 90 L 52 90 C 52 85, 52 80, 53 75 Z M62 75 C 61 80, 60 85, 60 90 L 66 90 C 66 85, 66 80, 67 74 Z M70 72 C 70 78, 70 84, 70 90 L 76 90 C 76 84, 75 78, 75 71 Z";
+const COATI_ANILLOS = "M20 41 L 28 43 M19 31 L 27 33 M20 22 L 28 24 M22 13 L 29 15";
 
-const HOJA = "M50 96 C 24 84, 10 52, 26 22 C 34 8, 66 8, 74 22 C 90 52, 76 84, 50 96 Z";
-const HOJA_NERVADURAS =
-  "M50 92 C 50 70, 50 40, 50 14 M50 70 C 38 62, 30 52, 26 44 M50 52 C 62 46, 70 38, 74 30";
+// Bambú (tacuara): dos cañas segmentadas por nudos + hojas lanceoladas. Es
+// una figura vertical, pensada para vivir en los márgenes de sección.
+const BAMBU_CANAS =
+  "M40 3 H53 V23 H40 Z M40 27 H53 V47 H40 Z M40 51 H53 V71 H40 Z M40 75 H53 V100 H40 Z M60 16 H69 V35 H60 Z M60 39 H69 V58 H60 Z M60 62 H69 V81 H60 Z M60 85 H69 V100 H60 Z";
+const BAMBU_HOJAS =
+  "M40 26 C 30 21, 18 22, 11 29 C 20 34, 33 32, 40 27 Z M40 51 C 31 49, 21 53, 16 61 C 26 62, 36 57, 41 52 Z M69 38 C 78 32, 90 33, 95 40 C 86 45, 74 43, 69 39 Z M53 13 C 61 6, 73 5, 79 10 C 71 16, 59 17, 53 14 Z";
 
 function Figure({ kind }: { kind: FigureKind }) {
   if (kind === "mariposa") {
@@ -38,19 +48,21 @@ function Figure({ kind }: { kind: FigureKind }) {
       </>
     );
   }
-  if (kind === "tucan") {
+  if (kind === "coati") {
     return (
       <>
-        <path d={TUCAN_BODY} />
-        <path d={TUCAN_PICO} />
-        <path d={TUCAN_COLA} />
+        <path d={COATI_COLA} />
+        <path d={COATI_PATAS} />
+        <path d={COATI_CUERPO} />
+        <path d={COATI_CABEZA} />
+        <path d={COATI_ANILLOS} fill="none" stroke="currentColor" strokeWidth="1.4" />
       </>
     );
   }
   return (
     <>
-      <path d={HOJA} />
-      <path d={HOJA_NERVADURAS} fill="none" stroke="currentColor" strokeWidth="1.4" />
+      <path d={BAMBU_CANAS} />
+      <path d={BAMBU_HOJAS} />
     </>
   );
 }
@@ -60,8 +72,12 @@ function Figure({ kind }: { kind: FigureKind }) {
 // viewport (scrub). Va POR DETRÁS del contenido: z-0, mientras los
 // contenedores de sección están en z-[1]. Colocarla dentro de una
 // <section class="relative"> en una zona de aire (padding/margen) para que no
-// cruce texto ni imágenes. `data-selva-figure` la ancla al trazado de
-// SelvaTrail, que conecta todas las figuras.
+// cruce texto ni imágenes. REGLA: offset + size tiene que entrar en el padding
+// vertical de la sección (top-N + size <= padding-top, ídem abajo). Apoyarse en
+// el margen horizontal no alcanza: con max-w + px-12 el aire lateral se come
+// entero entre md y lg y la figura termina encima del kicker.
+// `data-selva-figure` la ancla al trazado de SelvaTrail, que conecta todas las
+// figuras.
 export function SelvaFigure({
   kind,
   className = "",
@@ -118,11 +134,14 @@ export function SelvaFigure({
       style={{ color, width: size, height: size }}
     >
       <svg viewBox="0 0 100 100" width={size} height={size} style={svgStyle} focusable="false">
+        {/* opacity en el <g> y no stroke/fill-opacity por path: las figuras se
+            arman con partes superpuestas (cuerpo, patas, cola…) y la opacidad
+            por elemento las compone dos veces, marcando costuras */}
         <g
           fill="none"
           stroke="currentColor"
           strokeWidth={1.3}
-          strokeOpacity={0.45}
+          opacity={0.45}
           strokeLinejoin="round"
         >
           <Figure kind={kind} />
@@ -135,7 +154,7 @@ export function SelvaFigure({
         style={{ clipPath: "inset(100% 0 0 0)" }}
       >
         <svg viewBox="0 0 100 100" width={size} height={size} style={svgStyle} focusable="false">
-          <g fill="currentColor" fillOpacity={0.88} stroke="none">
+          <g fill="currentColor" opacity={0.88} stroke="none">
             <Figure kind={kind} />
           </g>
         </svg>

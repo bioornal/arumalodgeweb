@@ -14,7 +14,8 @@ export function UnitsGrid() {
 
   return (
     <section id="departamentos" className="relative bg-arena-clara py-16 md:py-[130px]">
-      <SelvaFigure kind="hoja" className="bottom-2 left-[2%] -rotate-12" size={110} />
+      {/* En el aire de abajo (padding 130px): bottom-1 + 118 no toca las tarjetas */}
+      <SelvaFigure kind="bambu" className="bottom-1 left-[3%]" size={118} />
       <div className="relative z-[1] mx-auto max-w-[1320px] px-5 md:px-12">
         {/* Section header */}
         <div className="mb-[44px] md:mb-[60px] flex flex-wrap items-end justify-between gap-6">
@@ -72,8 +73,12 @@ export function UnitsGrid() {
                     </span>
                   </div>
 
-                  {/* Sub info */}
-                  <div className="mt-2 text-[13px] tracking-[.02em] text-muted">
+                  {/* Sub info — data-trail-avoid: es copy en <div>, que el
+                      trazado de SelvaTrail no detecta por sí solo */}
+                  <div
+                    data-trail-avoid
+                    className="mt-2 text-[13px] tracking-[.02em] text-muted"
+                  >
                     {t(`${slug}.sub` as `${UnitSlug}.sub`)}
                   </div>
                 </Link>
